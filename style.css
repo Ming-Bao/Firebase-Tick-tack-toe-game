@@ -1,0 +1,82 @@
+/****************************************************************
+// General
+****************************************************************/
+.center {
+  text-align: center;
+}
+
+body {
+  background-color: greenyellow;
+}
+
+h3 {
+  margin: 10px;
+}
+
+.float {
+  float: left;
+}
+
+/****************************************************************
+// Game
+****************************************************************/
+
+/****************************************************************
+// Left Wing
+****************************************************************/
+.p1 {
+  background-color: white;
+  width: 20vw;
+  height: 100vh;
+  border: solid;
+  border-color: black;
+  margin: 0px;
+  padding: 0pc;
+}
+
+/****************************************************************
+// Game
+****************************************************************/
+.header {
+  background-color: white;
+  width: 60vw;
+  height: 20vh;
+  border: solid;
+  border-color: black;
+  margin: 0px;
+}
+
+.footer {
+  background-color: white;
+  width: 60vw;
+  height: 20vh;
+  border: solid;
+  border-color: black;
+  margin: 0px;
+}
+
+.TTTbutton {
+  height: 20vh;
+  width: 20vw;
+  border: solid;
+  border-color: black;
+  background-color: lightgray;
+  color: black;
+  margin: 0px;
+}
+
+/****************************************************************
+// Right Wing
+****************************************************************/
+.p2 {
+  background-color: white;
+  width: 20vw;
+  height: 100vh;
+  float: left;
+  border: solid;
+  border-color: black;
+}
+
+/****************************************************************
+// End Of Code
+****************************************************************/

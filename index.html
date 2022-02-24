@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>13COMP Ming Bao Tick Tac Toe</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="13COMP firebase">
+	<meta name="keywords" content="13COMP, firebase">
+	<meta name="author" content="????">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- stylesheets *****************************************-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style.css">
+	<!-- P5.js ***********************************************-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js">
+
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js">
+
+	</script>
+
+	<!-- firebase start **************************************-->
+	<!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js">
+
+	</script>
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js">
+
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js">
+
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js">
+
+	</script>
+	<!-- firebase end ****************************************-->
+
+	<!-- Your modules ****************************************-->
+	<script src="TTTmanager.js">
+
+	</script>
+</head>
+
+<!--*************************************************************
+//  BODY
+**************************************************************-->
+
+<body>
+
+<!--*************************************************************
+// Left Wing
+**************************************************************-->
+  <div class="p1 float">
+    <h2 class="center"> Player 1 </h2>
+    <h3 class=""> wins: </h3>
+    <h3 class=""> losses: </h3>
+    <h3 class=""> draws: </h3>
+  </div>
+
+<!--*************************************************************
+// Game Body
+**************************************************************-->
+<div class="float game">
+
+<!--*************************************************************
+// Header
+**************************************************************-->
+  <div class="header center">
+    <h1> Tic Tac Toe Game </h1>
+  </div>
+
+<!--*************************************************************
+// 3X3 Game Grid
+**************************************************************-->
+	<div class="w3-row">
+		<button class="TTTbutton w3-third" id="0" onclick="buttonHit(0)"> </button>       
+    <button class="TTTbutton w3-third" id="1" onclick="buttonHit(1)"> </button>
+    <button class="TTTbutton w3-third" id="2" onclick="buttonHit(2)"> </button>
+  </div>
+
+   <div class="w3-row">
+    <button class="TTTbutton w3-third" id="3" onclick="buttonHit(3)"> </button> 
+    <button class="TTTbutton w3-third" id="4" onclick="buttonHit(4)"> </button>
+    <button class="TTTbutton w3-third" id="5" onclick="buttonHit(5)"> </button>
+  </div>
+
+  <div class="w3-row">
+    <button class="TTTbutton w3-third" id="6" onclick="buttonHit(6)"> </button> 
+    <button class="TTTbutton w3-third" id="7" onclick="buttonHit(7)"> </button>
+    <button class="TTTbutton w3-third" id="8" onclick="buttonHit(8)"> </button>
+  </div>
+
+<!--*************************************************************
+// Footer
+**************************************************************-->
+  <div class="footer center float">
+    <h1 class="noMargin"> bottom text </h1>
+    <button onclick="resetGame()"> reset </button>
+  </div>
+  </div>
+<!--*************************************************************
+// Game Body End
+**************************************************************-->
+
+<!--*************************************************************
+// Right Wing
+**************************************************************-->
+  <div class="p2">
+    <h2 class="center"> Player 2 </h2>
+    <h3 class=""> wins: </h3>
+    <h3 class=""> losses: </h3>
+    <h3 class=""> draws: </h3>
+  </div>
+
+</body>
+</html>
