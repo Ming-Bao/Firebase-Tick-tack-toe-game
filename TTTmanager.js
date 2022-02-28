@@ -38,8 +38,10 @@ var btnClicked = ["", "", "", "", "", "", "", "", ""];
 /********************************************************/
 function buttonHit(_btnID) {
   var id = document.getElementById(_btnID);
-
   playerTurn = 1 - playerTurn;
+
+  document.getElementById("btmText").innerHTML =
+  "Player " + (playerTurn + 1) + " Turn"
   id.disabled = true;
   determinXO(_btnID)
   determinWin();
@@ -82,7 +84,8 @@ function determinWin() {
     if (btnClicked[WINCONDARR[0]] == player[playerTurn].symbol && 
         btnClicked[WINCONDARR[1]] == player[playerTurn].symbol &&
         btnClicked[WINCONDARR[2]] == player[playerTurn].symbol) {
-      console.log("player " + playerTurn + " win")
+      
+      console.log("player " + (playerTurn+1) + " win")
       winFlag = true;
       addWinLoss();
     }
