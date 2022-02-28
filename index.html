@@ -54,9 +54,9 @@
 **************************************************************-->
   <div class="p1 float">
     <h2 class="center"> Player 1 </h2>
-    <h3 class=""> wins: </h3>
-    <h3 class=""> losses: </h3>
-    <h3 class=""> draws: </h3>
+    <h3 id="win0"> wins: </h3>
+    <h3 id="loss0"> losses: </h3>
+    <h3 id="draw0"> draws: </h3>
   </div>
 
 <!--*************************************************************
@@ -75,7 +75,7 @@
 // 3X3 Game Grid
 **************************************************************-->
 	<div class="w3-row">
-		<button class="TTTbutton w3-third" id="0" onclick="buttonHit(0)"> </button>       
+		<button class="TTTbutton w3-third" id="0" onclick="buttonHit(0)"> </button>      
     <button class="TTTbutton w3-third" id="1" onclick="buttonHit(1)"> </button>
     <button class="TTTbutton w3-third" id="2" onclick="buttonHit(2)"> </button>
   </div>
@@ -97,7 +97,7 @@
 **************************************************************-->
   <div class="footer center float">
     <h1 class="noMargin"> bottom text </h1>
-    <button onclick="resetGame()"> reset </button>
+    <button class="noMargin" onclick="resetGame()"> reset </button>
   </div>
   </div>
 <!--*************************************************************
@@ -109,9 +109,9 @@
 **************************************************************-->
   <div class="p2">
     <h2 class="center"> Player 2 </h2>
-    <h3 class=""> wins: </h3>
-    <h3 class=""> losses: </h3>
-    <h3 class=""> draws: </h3>
+    <h3 id="win1"> wins: </h3>
+    <h3 id="loss1"> losses: </h3>
+    <h3 id="draw1"> draws: </h3>
   </div>
 
 </body>

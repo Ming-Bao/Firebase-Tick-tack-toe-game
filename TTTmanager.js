@@ -19,7 +19,7 @@ var player = [{
 
 playerTurn = 1
 
-const WINCOND = [
+const ALLWINCOND = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
@@ -31,25 +31,6 @@ const WINCOND = [
 ]
 
 var btnClicked = ["", "", "", "", "", "", "", "", ""];
-
-// const XWINCOND1 = ["x", "x", "x", false, false, false, false, false, false];
-// const XWINCOND2 = [false, false, false, "x", "x", "x", false, false, false];
-// const XWINCOND3 = [false, false, false, false, false, false, "x", "x", "x"];
-// const XWINCOND4 = ["x", false, false, "x", false, false, "x", false, false];
-// const XWINCOND5 = [false, "x", false, false, "x", false, false, "x", false];
-// const XWINCOND6 = [false, false, "x", false, false, "x", false, false, "x"];
-// const XWINCOND7 = ["x", false, false, false, "x", false, false, false, "x"];
-// const XWINCOND8 = [false, false, "x", false, "x", false, "x", false, false];
-
-// const OWINCOND1 = ["O", "O", "O", false, false, false, false, false, false];
-// const OWINCOND2 = [false, false, false, "O", "O", "O", false, false, false];
-// const OWINCOND3 = [false, false, false, false, false, false, "O", "O", "O"];
-// const OWINCOND4 = ["O", false, false, "O", false, false, "O", false, false];
-// const OWINCOND5 = [false, "O", false, false, "O", false, false, "O", false];
-// const OWINCOND6 = [false, false, "O", false, false, "O", false, false, "O"];
-// const OWINCOND7 = ["O", false, false, false, "O", false, false, false, "O"];
-// const OWINCOND8 = [false, false, "O", false, "O", false, "O", false, false];
-
 /********************************************************/
 // calls when a button is hit
 // passes the id of the button hit
@@ -57,7 +38,6 @@ var btnClicked = ["", "", "", "", "", "", "", "", ""];
 /********************************************************/
 function buttonHit(_btnID) {
   var id = document.getElementById(_btnID);
-  console.log ("button hit: " + _btnID);
 
   playerTurn = 1 - playerTurn;
   id.disabled = true;
@@ -76,20 +56,18 @@ function determinXO(_btnID) {
   btnClicked[_btnID] = player[playerTurn].symbol;
   id.style.fontSize = "300%";
   id.style.backgroundColor = "aqua";
-
-  console.log(btnClicked);
 }
 
 /********************************************************/
 // resets all buttons and btnClicked array
 /********************************************************/
 function resetGame() {
-  for (var i = 0; i <= WINCOND.length; i++) {
+  for (var i = 0; i <= ALLWINCOND.length; i++) {
     var id = document.getElementById(i)
     id.disabled = false;
-    id.innerHTML = " "
+    id.innerHTML = ""
     id.style.backgroundColor = "lightgray"
-    btnClicked[i] = " ";
+    btnClicked[i] = "";
   }
 }
 
@@ -97,13 +75,68 @@ function resetGame() {
 // determins who wins the game
 /********************************************************/
 function determinWin() {
-  for (var i = 0; i < WINCOND.length; i++) {
-    if (btnClicked[WINCOND.[i, 1]] = player[playerTurn].symbol && 
-        btnClicked[WINCOND.[i, 2]] = player[playerTurn].symbol &&
-        btnClicked[WINCOND.[i, 3]] = player[playerTurn].symbol) {
-          console.log("win")
-
-      
-        }
+  var WINCONDARR
+  var winFlag = false
+  for (var i = 0; i < ALLWINCOND.length; i++) {
+    WINCONDARR = ALLWINCOND[i]
+    if (btnClicked[WINCONDARR[0]] == player[playerTurn].symbol && 
+        btnClicked[WINCONDARR[1]] == player[playerTurn].symbol &&
+        btnClicked[WINCONDARR[2]] == player[playerTurn].symbol) {
+      console.log("player " + playerTurn + " win")
+      winFlag = true;
+      addWinLoss();
+    }
   }
+
+  if (winFlag == true) {
+    for (var i = 0; i <= ALLWINCOND.length; i++) {
+      document.getElementById(i).disabled = true
+    }
+  }
+  
+  if (winFlag == false) {
+    if (btnClicked[0] != "" && 
+        btnClicked[1] != "" &&
+        btnClicked[2] != "" &&
+        btnClicked[3] != "" && 
+        btnClicked[4] != "" &&
+        btnClicked[5] != "" &&
+        btnClicked[6] != "" && 
+        btnClicked[7] != "" &&
+        btnClicked[8] != ""){
+      console.log("draw");
+      addDraw();
+    }
+ }
 }
+
+/********************************************************/
+// adds wins or losses when someone wins
+/********************************************************/
+function addWinLoss() {
+  player[playerTurn].win++
+  document.getElementById("win" + playerTurn).innerHTML = 
+  "wins: " + player[playerTurn].win
+  
+  playerTurn = 1 - playerTurn
+  player[playerTurn].loss++
+  document.getElementById("loss" + playerTurn).innerHTML = 
+  "losses: " + player[playerTurn].loss
+}
+
+/********************************************************/
+// adds wins or losses when someone wins
+/********************************************************/
+function addDraw() {
+  player[playerTurn].draw++
+  document.getElementById("draw" + playerTurn).innerHTML = 
+  "draws: " +  player[playerTurn].draw
+  
+  playerTurn = 1 - playerTurn
+  player[playerTurn].draw++
+  document.getElementById("draw" + playerTurn).innerHTML = 
+  "draws: " +  player[playerTurn].draw
+}
+/********************************************************/
+// End Of Code
+/********************************************************/
