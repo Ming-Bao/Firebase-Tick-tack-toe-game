@@ -42,17 +42,21 @@
 
 	</script>
 </head>
-
+  
 <!--*************************************************************
 //  BODY
 **************************************************************-->
-
 <body>
+
+<!--*************************************************************
+// TTT game start
+**************************************************************-->
+<div class="w3-row">
 
 <!--*************************************************************
 // Left Wing
 **************************************************************-->
-  <div class="p1 float">
+  <div class="p1 float w3-col s12 m3 l3">
     <h2 class="center"> Player 1 </h2>
     <h3 id="win0"> wins: </h3>
     <h3 id="loss0"> losses: </h3>
@@ -62,44 +66,39 @@
 <!--*************************************************************
 // Game Body
 **************************************************************-->
-<div class="float game">
+  <div class="float game w3-col s12 m6 l6">
 
-<!--*************************************************************
-// Header
-**************************************************************-->
-  <div class="header center">
-    <h1> Tic Tac Toe Game </h1>
+<!-- Header **********************************************-->
+    <div class="center header">
+      <h1> Tic Tac Toe Game </h1>
+    </div>
+  
+<!-- 3x3 Game Grid ****************************************-->
+    <div class="w3-row">
+      <button class="TTTbutton w3-third" id="0" onclick="buttonHit(0)"> </button>  
+      <button class="TTTbutton w3-third" id="1" onclick="buttonHit(1)"> </button>
+      <button class="TTTbutton w3-third" id="2" onclick="buttonHit(2)"> </button>
+    </div>
+  
+     <div class="w3-row">
+      <button class="TTTbutton w3-third" id="3" onclick="buttonHit(3)"> </button> 
+      <button class="TTTbutton w3-third" id="4" onclick="buttonHit(4)"> </button>
+      <button class="TTTbutton w3-third" id="5" onclick="buttonHit(5)"> </button>
+    </div>
+  
+    <div class="w3-row">
+      <button class="TTTbutton w3-third" id="6" onclick="buttonHit(6)"> </button> 
+      <button class="TTTbutton w3-third" id="7" onclick="buttonHit(7)"> </button>
+      <button class="TTTbutton w3-third" id="8" onclick="buttonHit(8)"> </button>
+    </div>
+  
+<!-- Footer ************************************************-->
+    <div class="center footer">
+      <h1 class="noMargin" id="btmText"> Player 1 Turn </h1>
+      <button class="noMargin" onclick="resetGame()"> reset </button>
+    </div>
   </div>
-
-<!--*************************************************************
-// 3X3 Game Grid
-**************************************************************-->
-	<div class="w3-row">
-		<button class="TTTbutton w3-third" id="0" onclick="buttonHit(0)"> </button>      
-    <button class="TTTbutton w3-third" id="1" onclick="buttonHit(1)"> </button>
-    <button class="TTTbutton w3-third" id="2" onclick="buttonHit(2)"> </button>
-  </div>
-
-   <div class="w3-row">
-    <button class="TTTbutton w3-third" id="3" onclick="buttonHit(3)"> </button> 
-    <button class="TTTbutton w3-third" id="4" onclick="buttonHit(4)"> </button>
-    <button class="TTTbutton w3-third" id="5" onclick="buttonHit(5)"> </button>
-  </div>
-
-  <div class="w3-row">
-    <button class="TTTbutton w3-third" id="6" onclick="buttonHit(6)"> </button> 
-    <button class="TTTbutton w3-third" id="7" onclick="buttonHit(7)"> </button>
-    <button class="TTTbutton w3-third" id="8" onclick="buttonHit(8)"> </button>
-  </div>
-
-<!--*************************************************************
-// Footer
-**************************************************************-->
-  <div class="footer center float">
-    <h1 class="noMargin" id="btmText"> Player 1 Turn </h1>
-    <button class="noMargin" onclick="resetGame()"> reset </button>
-  </div>
-  </div>
+  
 <!--*************************************************************
 // Game Body End
 **************************************************************-->
@@ -107,12 +106,16 @@
 <!--*************************************************************
 // Right Wing
 **************************************************************-->
-  <div class="p2">
+  <div class="p2 float w3-col s12 m3 l3">
     <h2 class="center"> Player 2 </h2>
     <h3 id="win1"> wins: </h3>
     <h3 id="loss1"> losses: </h3>
     <h3 id="draw1"> draws: </h3>
   </div>
+</div>
 
+<!--*************************************************************
+// TTT game end
+**************************************************************-->
 </body>
 </html>

@@ -30,8 +30,7 @@ h3 {
   height: 100vh;
   border: solid;
   border-color: black;
-  margin: 0px;
-  padding: 0pc;
+  color: blakc;
 }
 
 /****************************************************************
@@ -39,25 +38,25 @@ h3 {
 ****************************************************************/
 .header {
   background-color: white;
-  width: 60vw;
   height: 20vh;
   border: solid;
   border-color: black;
   margin: 0px;
+  color: black;
 }
 
 .footer {
   background-color: white;
-  width: 60vw;
   height: 20vh;
   border: solid;
   border-color: black;
   margin: 0px;
+  color: black
 }
 
 .TTTbutton {
   height: 20vh;
-  width: 20vw;
+  width: calc(100% / 3);
   border: solid;
   border-color: black;
   background-color: lightgray;
@@ -70,11 +69,11 @@ h3 {
 ****************************************************************/
 .p2 {
   background-color: white;
-  width: 17vw;
   height: 100vh;
   float: left;
   border: solid;
   border-color: black;
+  color: black
 }
 
 /****************************************************************

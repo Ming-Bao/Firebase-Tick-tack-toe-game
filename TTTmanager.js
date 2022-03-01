@@ -70,6 +70,8 @@ function resetGame() {
     id.innerHTML = ""
     id.style.backgroundColor = "lightgray"
     btnClicked[i] = "";
+    document.getElementById("btmText").innerHTML = //not working
+    "Player " + (playerTurn + 1) + " Turn"
   }
 }
 
@@ -86,6 +88,8 @@ function determinWin() {
         btnClicked[WINCONDARR[2]] == player[playerTurn].symbol) {
       
       console.log("player " + (playerTurn+1) + " win")
+      document.getElementById("btmText").innerHTML =
+      "Player " + (playerTurn + 1) + " win"
       winFlag = true;
       addWinLoss();
     }
