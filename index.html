@@ -38,10 +38,13 @@
 	<!-- firebase end ****************************************-->
 
 	<!-- Your modules ****************************************-->
-	<script src="TTTmanager.js">
-
-	</script>
+  <script src="FB_manager.js"></script> 
+	<script src="TTT_manager.js"></script>
+  <script src="REG_manager.js"></script>
+  <script src="UI_manager.js"></script>
 </head>
+
+
   
 <!--*************************************************************
 //  BODY
@@ -49,9 +52,77 @@
 <body>
 
 <!--*************************************************************
+// Landing Page Start
+**************************************************************-->  
+	<section id="s_startP" class="s_startP">
+		<center><div class="s_startTXT">
+      <h1>Welcome to Ming's Tactical Tic Tac Toe Game</h1>
+      <h2>Please Hit Login To Continue</h2>
+			<button class="w3-button w3-red" onclick="fb_login(playerDetails)"> Login </button>
+    </div></center>
+	</section>
+  
+<!--*************************************************************
+// REG Page Start
+**************************************************************-->
+  <section id="s_regP" class="s_regP w3-container">
+    <h1> Register Page</h1>
+    <div class="w3-row">
+      <!-- this col diplays what the user has to input-->
+      <div class="w3-col m2">
+        <p class="inputSpacing"> Name </p>
+        <p class="inputSpacing"> Email </p>
+        <p class="inputSpacing"> Age </p>
+        <p class="inputSpacing"> Gender </p>
+        <p class="inputSpacing"> Phone Number </p>
+        <p class="inputSpacing"> Credit Card </p>
+        <p class="inputSpacing"> Address </p>
+        <p class="inputSpacing"> Suburb </p>
+        <p class="inputSpacing"> City </p>
+        <p class="inputSpacing"> Postal Code </p>
+      </div>
+      <!-- this col is where all the input boxes are -->
+      <form id="f_reg">
+        <div class="w3-col m6 w3-white">
+          <p id="p_regName" style="margin: 0px;" class="w3-input w3-border" 
+            required name="name" placeholder="name"></p>
+          <p id="p_regEmail" style="margin: 0px;" class="w3-input w3-border" 
+            required name="email" placeholder="email"></p>
+          <input class="w3-input w3-border" required name="age" type="number" placeholder="age">
+          <select id="gender" style="height: 35px;">
+                <option value="f">female</option>
+                <option value="m">male</option>
+                <option value="o">other</option>
+                <option value="?">prefer not to say</option>
+          </select>
+          <input class="w3-input w3-border" required name="Phone Number" 
+            type="number" placeholder="Phone Number">
+          <input class="w3-input w3-border" required name="credit card" 
+            type="number" placeholder="credit card">
+          <input class="w3-input w3-border" required name="Address" 
+            type="text" placeholder="Address">
+          <input class="w3-input w3-border" required name="Suburb" 
+            type="text" placeholder="Suburb">
+          <input class="w3-input w3-border" required name="City" 
+            type="text" placeholder="City">
+          <input class="w3-input w3-border" required name="Postal Code" 
+            type="text" placeholder="Postal Code">
+        </div>
+     </div>
+    </form>
+      <p><button class="w3-button w3-blue" onclick="ui_pageSwap('s_regP', 's_startP')"> Exit </button></p>
+      <p><button class="w3-button w3-blue" onclick="reg_BTN()"> register </button></p>
+
+  </section>
+
+<!--*************************************************************
+// REG Page End
+**************************************************************-->
+  
+<!--*************************************************************
 // TTT game start
 **************************************************************-->
-<div class="w3-row">
+<div class="w3-row s_gameP" id="s_gameP">
 
 <!--*************************************************************
 // Left Wing

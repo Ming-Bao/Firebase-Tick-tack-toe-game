@@ -17,6 +17,36 @@ h3 {
   float: left;
 }
 
+/***********************************************************
+  Starting page
+***********************************************************/
+.s_startP {
+  display: block;
+  height: 100vh;
+}
+
+.s_startTXT {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 80vw;
+}
+
+/****************************************************************
+// REG Page
+****************************************************************/
+.inputSpacing {
+  margin: 17px;
+}
+
+.s_regP {
+  height: 100vh;
+  display: none;
+}
+
 /****************************************************************
 // Game
 ****************************************************************/
@@ -30,12 +60,16 @@ h3 {
   height: 100vh;
   border: solid;
   border-color: black;
-  color: blakc;
+  color: black;
 }
 
 /****************************************************************
 // Game body 
 ****************************************************************/
+.s_gameP {
+  display: none;
+}
+
 .header {
   background-color: white;
   height: 20vh;

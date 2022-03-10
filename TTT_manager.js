@@ -43,7 +43,7 @@ function TTT_btnHit(_btnID) {
 
   document.getElementById("btmText").innerHTML =
   TTT_player[TTT_playerTurn].userName + " Turn"
-  TTT_playerTurn = 1 - TTT_playerTurn;
+  TTT_turnSwap();
   id.disabled = true;
   TTT_determinXO(_btnID)
   TTT_determinWin();
@@ -68,7 +68,7 @@ function TTT_determinXO(_btnID) {
 function TTT_resetGame() {
   document.getElementById("btmText").innerHTML =
   TTT_player[TTT_playerTurn].userName + " Turn";
-  TTT_playerTurn = 1 - TTT_playerTurn
+  TTT_turnSwap();
   
   for (var i = 0; i <= TTT_ALLWINCOND.length; i++) {
     var id = document.getElementById(i);
@@ -85,6 +85,8 @@ function TTT_resetGame() {
 function TTT_determinWin() {
   var WINCONDARR
   var winFlag = false
+
+  // win condition
   for (var i = 0; i < TTT_ALLWINCOND.length; i++) {
     WINCONDARR = TTT_ALLWINCOND[i]
     if (TTT_btnClicked[WINCONDARR[0]] == TTT_player[TTT_playerTurn].symbol && 
@@ -104,7 +106,8 @@ function TTT_determinWin() {
       document.getElementById(i).disabled = true
     }
   }
-  
+
+  // draw condition
   if (winFlag == false) {
     if (TTT_btnClicked[0] != "" && 
         TTT_btnClicked[1] != "" &&
@@ -129,7 +132,7 @@ function TTT_addWinLoss() {
   document.getElementById("win" + TTT_playerTurn).innerHTML = 
   "wins: " + TTT_player[TTT_playerTurn].win
   
-  TTT_playerTurn = 1 - TTT_playerTurn
+  TTT_turnSwap()
   TTT_player[TTT_playerTurn].loss++
   document.getElementById("loss" + TTT_playerTurn).innerHTML = 
   "losses: " + TTT_player[TTT_playerTurn].loss
@@ -142,11 +145,19 @@ function TTT_addDraw() {
   document.getElementById("draw" + TTT_playerTurn).innerHTML = 
   "draws: " +  TTT_player[TTT_playerTurn].draw
   
-  TTT_playerTurn = 1 - TTT_playerTurn
+  TTT_turnSwap()
   TTT_player[TTT_playerTurn].draw++
   document.getElementById("draw" + TTT_playerTurn).innerHTML = 
   "draws: " +  TTT_player[TTT_playerTurn].draw
 }
+
+/********************************************************
+// Changes TTT_playerSwap into eithwe 0 or 1
+/********************************************************/
+function TTT_turnSwap() {
+  TTT_playerTurn = 1 - TTT_playerTurn
+}
+
 /********************************************************/
 // End Of Code
 /********************************************************/
