@@ -3,7 +3,6 @@
 /**************************************************************/
 
 const PLAYER_DETAILS = "playerDetails";
-const SCORE = "score";
 const ADMIN = "admin";
 const PLACE_HOLDER = "PlaceHolder";
 
@@ -76,6 +75,7 @@ function fb_login(_dataRec) {
       _dataRec.name = user.displayName;
       _dataRec.photoURL = user.photoURL;
       loginStatus = 'logged in';
+      playerDetails.name
 
       // chck if this user has logged in before if yes then 
       // go to game page if nogo to the regestration page

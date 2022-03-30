@@ -25,7 +25,7 @@ h3 {
   height: 100vh;
 }
 
-.s_startTXT {
+.absoluteCenter {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -47,6 +47,13 @@ h3 {
   display: none;
 }
 
+/****************************************************************
+// REG Page
+****************************************************************/
+.s_lobbyP {
+  height: 100vh;
+  display: none;
+}
 /****************************************************************
 // Game
 ****************************************************************/
@@ -86,6 +93,11 @@ h3 {
   border-color: black;
   margin: 0px;
   color: black
+}
+
+.resetBTN {
+  display: none;
+  margin: auto;
 }
 
 .TTTbutton {

@@ -1,4 +1,4 @@
-/********************************************************/
+ /********************************************************/
 // Variables, constants and all that other good stuff
 /********************************************************/
 var TTT_player = [{
@@ -50,8 +50,8 @@ function TTT_btnHit(_btnID) {
 }
 
 /********************************************************/
-// determins if the TTT_player is X or O 
-// changes the button to X or O
+// changes the button clicked to X or O
+// X and O is determined by TTT_playerTurn
 /********************************************************/
 function TTT_determinXO(_btnID) {
   var id = document.getElementById(_btnID);
@@ -69,6 +69,7 @@ function TTT_resetGame() {
   document.getElementById("btmText").innerHTML =
   TTT_player[TTT_playerTurn].userName + " Turn";
   TTT_turnSwap();
+  document.getElementById("resetBTN").style.display="none";
   
   for (var i = 0; i <= TTT_ALLWINCOND.length; i++) {
     var id = document.getElementById(i);
@@ -97,6 +98,7 @@ function TTT_determinWin() {
       document.getElementById("btmText").innerHTML =
       TTT_player[TTT_playerTurn].userName + " win"
       winFlag = true;
+      document.getElementById("resetBTN").style.display="block";
       TTT_addWinLoss();
     }
   }
@@ -118,7 +120,9 @@ function TTT_determinWin() {
         TTT_btnClicked[6] != "" && 
         TTT_btnClicked[7] != "" &&
         TTT_btnClicked[8] != ""){
+      
       console.log("draw");
+      document.getElementById("resetBTN").style.display="block";
       TTT_addDraw();
     }
  }

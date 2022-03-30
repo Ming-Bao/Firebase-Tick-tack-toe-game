@@ -92,15 +92,12 @@ function reg_BTN() {
 // Return: form item's value
 /**************************************************************/
 function reg_getFormItemValue(_elementId, _item) {
-  //console.log('reg_getFormItemValue: _elementId=' + _elementId +
-  //	  ',  _item= ' + _item);
-
   return document.getElementById(_elementId).elements.item(_item).value;
 }
 
 /**************************************************************/
 // reg_validate()
-// validates stuff
+// validates user inputs
 /**************************************************************/
 function reg_validate(_input, _regEX, _minNum, _maxNum) {
   var errMsg = "";
