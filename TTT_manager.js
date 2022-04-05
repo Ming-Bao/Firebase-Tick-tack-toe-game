@@ -1,7 +1,7 @@
  /********************************************************/
 // Variables, constants and all that other good stuff
 /********************************************************/
-var TTT_player = [{
+var ttt_player = [{
   userName: "Ming X",
   symbol: "x",
   win: 0,
@@ -17,9 +17,9 @@ var TTT_player = [{
   
 }]
 
-var TTT_playerTurn = 1
+var ttt_playerTurn = 1
 
-const TTT_ALLWINCOND = [
+const ttt_ALLWINCOND = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
@@ -30,7 +30,7 @@ const TTT_ALLWINCOND = [
   [2,4,6]
 ]
 
-var TTT_btnClicked = ["", "", "", "", "", "", "", "", ""];
+var ttt_btnClicked = ["", "", "", "", "", "", "", "", ""];
 
 
 /********************************************************/
@@ -38,92 +38,92 @@ var TTT_btnClicked = ["", "", "", "", "", "", "", "", ""];
 // passes the id of the button hit
 // disables the button that's hit
 /********************************************************/
-function TTT_btnHit(_btnID) {
+function ttt_btnHit(_btnID) {
   var id = document.getElementById(_btnID);
 
   document.getElementById("btmText").innerHTML =
-  TTT_player[TTT_playerTurn].userName + " Turn"
-  TTT_turnSwap();
+  ttt_player[ttt_playerTurn].userName + " Turn"
+  ttt_turnSwap();
   id.disabled = true;
-  TTT_determinXO(_btnID)
-  TTT_determinWin();
+  ttt_determinXO(_btnID)
+  ttt_determinWin();
 }
 
 /********************************************************/
 // changes the button clicked to X or O
-// X and O is determined by TTT_playerTurn
+// X and O is determined by ttt_playerTurn
 /********************************************************/
-function TTT_determinXO(_btnID) {
+function ttt_determinXO(_btnID) {
   var id = document.getElementById(_btnID);
 
-  id.innerHTML = TTT_player[TTT_playerTurn].symbol;
-  TTT_btnClicked[_btnID] = TTT_player[TTT_playerTurn].symbol;
+  id.innerHTML = ttt_player[ttt_playerTurn].symbol;
+  ttt_btnClicked[_btnID] = ttt_player[ttt_playerTurn].symbol;
   id.style.fontSize = "300%";
   id.style.backgroundColor = "aqua";
 }
 
 /********************************************************/
-// resets all buttons and TTT_btnClicked array
+// resets all buttons and ttt_btnClicked array
 /********************************************************/
-function TTT_resetGame() {
+function ttt_resetGame() {
   document.getElementById("btmText").innerHTML =
-  TTT_player[TTT_playerTurn].userName + " Turn";
-  TTT_turnSwap();
+  ttt_player[ttt_playerTurn].userName + " Turn";
+  ttt_turnSwap();
   document.getElementById("resetBTN").style.display="none";
   
-  for (var i = 0; i <= TTT_ALLWINCOND.length; i++) {
+  for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
     var id = document.getElementById(i);
     id.disabled = false;
     id.innerHTML = ""
     id.style.backgroundColor = "lightgray"
-    TTT_btnClicked[i] = "";
+    ttt_btnClicked[i] = "";
   }
 }
 
 /********************************************************/
 // determins who wins the game
 /********************************************************/
-function TTT_determinWin() {
+function ttt_determinWin() {
   var WINCONDARR
   var winFlag = false
 
   // win condition
-  for (var i = 0; i < TTT_ALLWINCOND.length; i++) {
-    WINCONDARR = TTT_ALLWINCOND[i]
-    if (TTT_btnClicked[WINCONDARR[0]] == TTT_player[TTT_playerTurn].symbol && 
-        TTT_btnClicked[WINCONDARR[1]] == TTT_player[TTT_playerTurn].symbol &&
-        TTT_btnClicked[WINCONDARR[2]] == TTT_player[TTT_playerTurn].symbol) {
+  for (var i = 0; i < ttt_ALLWINCOND.length; i++) {
+    WINCONDARR = ttt_ALLWINCOND[i]
+    if (ttt_btnClicked[WINCONDARR[0]] == ttt_player[ttt_playerTurn].symbol && 
+        ttt_btnClicked[WINCONDARR[1]] == ttt_player[ttt_playerTurn].symbol &&
+        ttt_btnClicked[WINCONDARR[2]] == ttt_player[ttt_playerTurn].symbol) {
       
-      console.log((TTT_player[TTT_playerTurn].userName) + " win")
+      console.log((ttt_player[ttt_playerTurn].userName) + " win")
       document.getElementById("btmText").innerHTML =
-      TTT_player[TTT_playerTurn].userName + " win"
+      ttt_player[ttt_playerTurn].userName + " win"
       winFlag = true;
       document.getElementById("resetBTN").style.display="block";
-      TTT_addWinLoss();
+      ttt_addWinLoss();
     }
   }
 
   if (winFlag == true) {
-    for (var i = 0; i <= TTT_ALLWINCOND.length; i++) {
+    for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
       document.getElementById(i).disabled = true
     }
   }
 
   // draw condition
   if (winFlag == false) {
-    if (TTT_btnClicked[0] != "" && 
-        TTT_btnClicked[1] != "" &&
-        TTT_btnClicked[2] != "" &&
-        TTT_btnClicked[3] != "" && 
-        TTT_btnClicked[4] != "" &&
-        TTT_btnClicked[5] != "" &&
-        TTT_btnClicked[6] != "" && 
-        TTT_btnClicked[7] != "" &&
-        TTT_btnClicked[8] != ""){
+    if (ttt_btnClicked[0] != "" && 
+        ttt_btnClicked[1] != "" &&
+        ttt_btnClicked[2] != "" &&
+        ttt_btnClicked[3] != "" && 
+        ttt_btnClicked[4] != "" &&
+        ttt_btnClicked[5] != "" &&
+        ttt_btnClicked[6] != "" && 
+        ttt_btnClicked[7] != "" &&
+        ttt_btnClicked[8] != ""){
       
       console.log("draw");
       document.getElementById("resetBTN").style.display="block";
-      TTT_addDraw();
+      ttt_addDraw();
     }
  }
 }
@@ -131,35 +131,35 @@ function TTT_determinWin() {
 /********************************************************/
 // adds wins or losses when someone wins
 /********************************************************/
-function TTT_addWinLoss() {
-  TTT_player[TTT_playerTurn].win++
-  document.getElementById("win" + TTT_playerTurn).innerHTML = 
-  "wins: " + TTT_player[TTT_playerTurn].win
+function ttt_addWinLoss() {
+  ttt_player[ttt_playerTurn].win++
+  document.getElementById("win" + ttt_playerTurn).innerHTML = 
+  "wins: " + ttt_player[ttt_playerTurn].win
   
-  TTT_turnSwap()
-  TTT_player[TTT_playerTurn].loss++
-  document.getElementById("loss" + TTT_playerTurn).innerHTML = 
-  "losses: " + TTT_player[TTT_playerTurn].loss
+  ttt_turnSwap()
+  ttt_player[ttt_playerTurn].loss++
+  document.getElementById("loss" + ttt_playerTurn).innerHTML = 
+  "losses: " + ttt_player[ttt_playerTurn].loss
 }
 /********************************************************
-// adds wins or losses when someonw wins
+// adds wins or losses when someone wins
 /********************************************************/
-function TTT_addDraw() {
-  TTT_player[TTT_playerTurn].draw++
-  document.getElementById("draw" + TTT_playerTurn).innerHTML = 
-  "draws: " +  TTT_player[TTT_playerTurn].draw
+function ttt_addDraw() {
+  ttt_player[ttt_playerTurn].draw++
+  document.getElementById("draw" + ttt_playerTurn).innerHTML = 
+  "draws: " +  ttt_player[ttt_playerTurn].draw
   
-  TTT_turnSwap()
-  TTT_player[TTT_playerTurn].draw++
-  document.getElementById("draw" + TTT_playerTurn).innerHTML = 
-  "draws: " +  TTT_player[TTT_playerTurn].draw
+  ttt_turnSwap()
+  ttt_player[ttt_playerTurn].draw++
+  document.getElementById("draw" + ttt_playerTurn).innerHTML = 
+  "draws: " +  ttt_player[ttt_playerTurn].draw
 }
 
 /********************************************************
-// Changes TTT_playerSwap into eithwe 0 or 1
+// Changes ttt_playerSwap into either 0 or 1
 /********************************************************/
-function TTT_turnSwap() {
-  TTT_playerTurn = 1 - TTT_playerTurn
+function ttt_turnSwap() {
+  ttt_playerTurn = 1 - ttt_playerTurn
 }
 
 /********************************************************/

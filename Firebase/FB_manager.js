@@ -66,7 +66,8 @@ const firebaseConfig = {
 function fb_login(_dataRec) {
   console.log('fb_login: dataRec= ' + _dataRec);
   firebase.auth().onAuthStateChanged(newLogin);
-
+  document.getElementById("s_loginStatus").innerHTML = "logging in"
+  
   function newLogin(user) {
     if (user) {
       // user is signed in
@@ -76,6 +77,7 @@ function fb_login(_dataRec) {
       _dataRec.photoURL = user.photoURL;
       loginStatus = 'logged in';
       playerDetails.name
+      console.log("loginStatus= " + loginStatus);
 
       // chck if this user has logged in before if yes then 
       // go to game page if nogo to the regestration page

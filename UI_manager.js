@@ -14,5 +14,6 @@ function ui_gamePageReaveal () {
   document.getElementById("s_gameP").style.display="block";
   document.getElementById("s_startP").style.display="none";
   document.getElementById("s_regP").style.display="none";
-  //document.getElementById("s_adminP").style.display="none";
+
+  // ui_update
 }

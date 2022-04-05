@@ -39,10 +39,11 @@
 	<!-- firebase end ****************************************-->
 
 	<!-- Your modules ****************************************-->
-  <script src="FB_manager.js"></script> 
-	<script src="TTT_manager.js"></script>
+  <script src="/Firebase/FB_manager.js"></script> 
+	<script src="ttt_manager.js"></script>
   <script src="REG_manager.js"></script>
   <script src="UI_manager.js"></script>
+  <script src="/Firebase/FB_readOn.js"></script>
 </head>
 
 
@@ -56,11 +57,14 @@
 // Landing Page Start
 **************************************************************-->  
 	<section id="s_startP" class="s_startP">
-		<center><div class="absoluteCenter">
+		<center>
+      <div class="absoluteCenter">
       <h1>Welcome to Tic Tac Toe Game</h1>
       <h2>Hit Login To Continue</h2>
 			<button class="w3-button w3-red" onclick="fb_login(playerDetails)"> Login </button>
-    </div></center>
+      <p id="s_loginStatus">  </p>
+    </div>
+  </center>
 	</section>
   
 <!--*************************************************************
@@ -133,7 +137,7 @@
 // Lobby Page End
 **************************************************************-->
 <!--*************************************************************
-// TTT game start
+// ttt game start
 **************************************************************-->
 <div class="w3-row s_gameP" id="s_gameP">
 
@@ -159,36 +163,36 @@
   
 <!-- 3x3 Game Grid ****************************************-->
     <div class="w3-row">
-      <button class="TTTbutton w3-third" id="0" onclick="TTT_btnHit(0)">
+      <button class="tttbutton w3-third" id="0" onclick="ttt_btnHit(0)">
       </button>  
-      <button class="TTTbutton w3-third" id="1" onclick="TTT_btnHit(1)">
+      <button class="tttbutton w3-third" id="1" onclick="ttt_btnHit(1)">
       </button>
-      <button class="TTTbutton w3-third" id="2" onclick="TTT_btnHit(2)">
+      <button class="tttbutton w3-third" id="2" onclick="ttt_btnHit(2)">
       </button>
     </div>
   
      <div class="w3-row">
-      <button class="TTTbutton w3-third" id="3" onclick="TTT_btnHit(3)">
+      <button class="tttbutton w3-third" id="3" onclick="ttt_btnHit(3)">
       </button> 
-      <button class="TTTbutton w3-third" id="4" onclick="TTT_btnHit(4)">
+      <button class="tttbutton w3-third" id="4" onclick="ttt_btnHit(4)">
       </button>
-      <button class="TTTbutton w3-third" id="5" onclick="TTT_btnHit(5)">
+      <button class="tttbutton w3-third" id="5" onclick="ttt_btnHit(5)">
       </button>
     </div>
   
     <div class="w3-row">
-      <button class="TTTbutton w3-third" id="6" onclick="TTT_btnHit(6)">
+      <button class="tttbutton w3-third" id="6" onclick="ttt_btnHit(6)">
       </button> 
-      <button class="TTTbutton w3-third" id="7" onclick="TTT_btnHit(7)">
+      <button class="tttbutton w3-third" id="7" onclick="ttt_btnHit(7)">
       </button>
-      <button class="TTTbutton w3-third" id="8" onclick="TTT_btnHit(8)">
+      <button class="tttbutton w3-third" id="8" onclick="ttt_btnHit(8)">
       </button>
     </div>
   
 <!-- Footer ************************************************-->
     <div class="center footer">
       <h1 class="noMargin" id="btmText"> Player 1 Turn </h1>
-      <button class="resetBTN" id="resetBTN" onclick="TTT_resetGame()"> reset </button>
+      <button class="resetBTN" id="resetBTN" onclick="ttt_resetGame()"> reset </button>
     </div>
   </div>
   
@@ -208,7 +212,7 @@
 </div>
 
 <!--*************************************************************
-// TTT game end
+// ttt game end
 **************************************************************-->
 </body>
 </html>
