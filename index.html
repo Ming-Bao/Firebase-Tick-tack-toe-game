@@ -39,15 +39,15 @@
 	<!-- firebase end ****************************************-->
 
 	<!-- Your modules ****************************************-->
-  <script src="/Firebase/FB_manager.js"></script> 
+  <script src="/firebase/fb_manager.js"></script> 
 	<script src="ttt_manager.js"></script>
-  <script src="REG_manager.js"></script>
-  <script src="UI_manager.js"></script>
-  <script src="/Firebase/FB_readOn.js"></script>
+  <script src="reg_manager.js"></script>
+  <script src="ui_manager.js"></script>
+  <script src="/firebase/fb_readOn.js"></script>
 </head>
 
 
-  
+
 <!--*************************************************************
 //  BODY
 **************************************************************-->
@@ -124,26 +124,34 @@
   </section>
 
 <!--*************************************************************
-// REG Page End
-**************************************************************-->
-<!--*************************************************************
 // Lobby Page Start
 **************************************************************-->
-<div class="" id="s_lobbyP">
-
+<div class="absoluteCenter" id="s_lobbyP">
+  <h1> Game Lobby </h1>
+  <button id=""> Create Game </button>
+  <button id=""> Join Game </button>
 </div>
 
 <!--*************************************************************
-// Lobby Page End
+// Pending Lobby Page Start
 **************************************************************-->
+<div id="s_pendingP">
+  <p> pending page </p>
+</div>
+
+<!--*************************************************************
+// Active Lobby Page Start
+**************************************************************-->
+<div id="s_activeP">
+ <p> active page </p>
+</div>
+
 <!--*************************************************************
 // ttt game start
 **************************************************************-->
 <div class="w3-row s_gameP" id="s_gameP">
 
-<!--*************************************************************
-// Left Wing
-**************************************************************-->
+  <!-- left wing -->
   <div class="p1 float w3-col s12 m3 l3">
     <h2 class="center"> Player 1 </h2>
     <h3 id="win0"> wins: </h3>
@@ -151,17 +159,15 @@
     <h3 id="draw0"> draws: </h3>
   </div>
 
-<!--*************************************************************
-// Game Body
-**************************************************************-->
+  <!-- game body -->
   <div class="float game w3-col s12 m6 l6">
 
-<!-- Header **********************************************-->
+    <!-- header **********************************************-->
     <div class="center header">
       <h1> Tic Tac Toe Game </h1>
     </div>
   
-<!-- 3x3 Game Grid ****************************************-->
+    <!-- 3x3 game grid ****************************************-->
     <div class="w3-row">
       <button class="tttbutton w3-third" id="0" onclick="ttt_btnHit(0)">
       </button>  
@@ -189,20 +195,14 @@
       </button>
     </div>
   
-<!-- Footer ************************************************-->
+    <!-- footer ************************************************-->
     <div class="center footer">
       <h1 class="noMargin" id="btmText"> Player 1 Turn </h1>
       <button class="resetBTN" id="resetBTN" onclick="ttt_resetGame()"> reset </button>
     </div>
   </div>
-  
-<!--*************************************************************
-// Game Body End
-**************************************************************-->
 
-<!--*************************************************************
-// Right Wing
-**************************************************************-->
+  <!-- right wing -->
   <div class="p2 float w3-col s12 m3 l3">
     <h2 class="center"> Player 2 </h2>
     <h3 id="win1"> wins: </h3>

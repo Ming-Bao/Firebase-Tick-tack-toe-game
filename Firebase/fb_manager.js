@@ -1,16 +1,17 @@
 /**************************************************************/
 // create variables
 /**************************************************************/
-
+// firebase paths
 const PLAYER_DETAILS = "playerDetails";
 const ADMIN = "admin";
 const PLACE_HOLDER = "PlaceHolder";
 
-
+// world variables
 var loginStatus = ' ';
 var readStatus = ' ';
 var writeStatus = ' ';
 
+// player details
 var playerDetails = {
   uid: '',
   email: '',
@@ -79,7 +80,7 @@ function fb_login(_dataRec) {
       playerDetails.name
       console.log("loginStatus= " + loginStatus);
 
-      // chck if this user has logged in before if yes then 
+      // check if this user has logged in before if yes then 
       // go to game page if nogo to the regestration page
       fb_readRec(PLAYER_DETAILS, playerDetails.uid, false, fb_processLogin);
     }
@@ -217,7 +218,7 @@ function fb_processHighScore(_status, _data) {
 function fb_processLogin(_result) {
   console.log("result = " + _result)
   if (_result == "OK") {
-    ui_gamePageReaveal();
+    ui_pageSwap("s_startP", "s_lobbyP");
     fb_readRec(ADMIN, playerDetails.uid, false, fb_processAdmin);
   }
   else {
@@ -240,5 +241,5 @@ function fb_processAdmin (_status) {
   }
 }
 /**************************************************************/
-//    END OF MODULE
+// END OF MODULE
 /**************************************************************/

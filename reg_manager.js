@@ -80,7 +80,8 @@ function reg_BTN() {
   if (flag == true){
   fb_writeRec(PLAYER_DETAILS, playerDetails.uid, playerDetails);
   //fb_readRec(ADMIN, playerDetails.uid, false, fb_processAdmin);
-  ui_gamePageReaveal();
+  //ui_gamePageReaveal();
+  ui_pageSwap("s_regP", "s_lobbyP");
   }
 }
 
@@ -117,6 +118,6 @@ function reg_validate(_input, _regEX, _minNum, _maxNum) {
   return errMsg
 }
 
-/***************************************************************/
-//    END OF PROG
-/***************************************************************/
+/**************************************************************/
+// END OF MODULE
+/**************************************************************/
