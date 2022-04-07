@@ -24,7 +24,7 @@ function fb_readOnRec(_path, _key, _data, _processFunc) {
     console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
   
     readStatus = "waiting";
-    firebase.database().ref(_path + '/' + _key).once("value", gotRecord, readErr);
+    firebase.database().ref(_path + '/' + _key).on("value", gotRecord, readErr);
   
     function gotRecord(snapshot) {
       if (snapshot.val() == null) {
