@@ -15,9 +15,9 @@ var fb_playerTurn = {
 }
 
 /**************************************************************/
-// fb_readRec(_path, _key, _data, _function)
-// Read a DB record 
-// Input:  path & key of record to read and where to save it
+// fb_readOnRec(_path, _key, _data, _function)
+// Commit a readon on a DB record 
+// Input:  
 // Return:  
 /**************************************************************/
 function fb_readOnRec(_path, _key, _data, _processFunc) {
