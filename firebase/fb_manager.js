@@ -187,7 +187,7 @@ function fb_readRec(_path, _key, _data, _processFunc) {
 
 /**************************************************************/
 // fb_processPlayerDetails()
-// Read a specific DB record used with fb_readRec
+// Stores database record in a function
 // Input: n/a
 // Return: n/a
 /**************************************************************/
@@ -196,6 +196,23 @@ function fb_processPlayerDetails(_status, _data) {
   _data.name = dbData.name;
   _data.email = dbData.email;
   _data.photoURL = dbData.photoURL;
+}
+
+/**************************************************************/
+// processPendingLobby()
+// Stores database record
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function processPendingLobby(_status, _dbData) {
+  
+  _dbData.forEach(
+    function(_currentRec) {
+      var city = _currentRec.val().city
+      var phone = _currentRec.val().phone
+      fb_addToTable
+    }
+  )
 }
 
 /**************************************************************/

@@ -1,11 +1,12 @@
 
 // pending lobby info
-var fb_pending = {
-
+var fb_pendingLobby = {
+  city: '',
+  phone: ''
 }
 
 // active lobby info
-var fb_active = {
+var fb_activeLobby = {
 
 }
 
@@ -16,8 +17,17 @@ var fb_playerTurn = {
 
 /**************************************************************/
 // fb_readOnRec(_path, _key, _data, _function)
-// Commit a readon on a DB record 
-// Input:  
+// Initilise a readon on a firebase record
+// Input:  path & key of record to read and where to save it
+// Return:  
+/**************************************************************/
+function fb_createPendingLobby() {
+  fb_readAll(PLAYER_DETAILS, processPendingLobby)
+}
+/**************************************************************/
+// fb_readOnRec(_path, _key, _data, _function)
+// Initilise a readon on a firebase record
+// Input:  path & key of record to read and where to save it
 // Return:  
 /**************************************************************/
 function fb_readOnRec(_path, _key, _data, _processFunc) {
