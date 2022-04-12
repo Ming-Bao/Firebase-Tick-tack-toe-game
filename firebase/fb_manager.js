@@ -205,7 +205,7 @@ function fb_processPlayerDetails(_status, _data) {
 // Return: n/a
 /**************************************************************/
 function processPendingLobby(_status, _dbData) {
-  
+
   _dbData.forEach(
     function(_currentRec) {
       var city = _currentRec.val().city
@@ -221,12 +221,23 @@ function processPendingLobby(_status, _dbData) {
 // Return: n/a
 /**************************************************************/
 function fb_addToTable(_data) {
-  console.log("fb_add to table")
+
+
+  var table = document.getElementById("t_gameLobby");
+
+  var row = table.insertRow(-1)
+
+  var cell1 = row.insertCell(0)
+  var cell2 = row.insertCell(1)
+
+  cell1.innerHTML = _data
+
+  
   var button = document.createElement("button");
-  var td = document.createElement("td");
-  button.innerText = "buy";
+  cell2 = document.createElement("td");
+  button.innerText = "join";
   button.className = "btn_buy";
-  td.append(button);
+  cell2.append(button);
 }
 /**************************************************************/
 // fb_processHighScore()
