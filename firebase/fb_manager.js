@@ -209,12 +209,25 @@ function processPendingLobby(_status, _dbData) {
   _dbData.forEach(
     function(_currentRec) {
       var city = _currentRec.val().city
-      var phone = _currentRec.val().phone
-      fb_addToTable
+      fb_addToTable(city);
     }
   )
 }
 
+/**************************************************************/
+// fb_addToTable()
+// Stores database record
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_addToTable(_data) {
+  console.log("fb_add to table")
+  var button = document.createElement("button");
+  var td = document.createElement("td");
+  button.innerText = "buy";
+  button.className = "btn_buy";
+  td.append(button);
+}
 /**************************************************************/
 // fb_processHighScore()
 // Read a specific DB record used with fb_readRec

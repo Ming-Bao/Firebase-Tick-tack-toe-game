@@ -22,7 +22,8 @@ var fb_playerTurn = {
 // Return:  
 /**************************************************************/
 function fb_createPendingLobby() {
-  fb_readAll(PLAYER_DETAILS, processPendingLobby)
+  fb_readAll(PLAYER_DETAILS, processPendingLobby);
+  ui_pageSwap("s_lobbyP", "s_pendingP");
 }
 /**************************************************************/
 // fb_readOnRec(_path, _key, _data, _function)
