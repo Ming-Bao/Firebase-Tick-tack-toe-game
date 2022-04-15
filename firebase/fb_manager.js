@@ -222,7 +222,6 @@ function processPendingLobby(_status, _dbData) {
 /**************************************************************/
 function fb_addToTable(_data) {
 
-
   var table = document.getElementById("t_gameLobby");
 
   var row = table.insertRow(-1)
@@ -231,14 +230,15 @@ function fb_addToTable(_data) {
   var cell2 = row.insertCell(1)
 
   cell1.innerHTML = _data
-
   
-  var button = document.createElement("button");
-  cell2 = document.createElement("td");
-  button.innerText = "join";
-  button.className = "btn_buy";
-  cell2.append(button);
+  var btn = document.createElement('input');
+  btn.type = "button";
+  btn.className = "initActiveGame";
+  btn.value = "Join Game";
+  btn.onclick = fb_initActiveGame;
+  cell2.appendChild(btn);
 }
+
 /**************************************************************/
 // fb_processHighScore()
 // Read a specific DB record used with fb_readRec
