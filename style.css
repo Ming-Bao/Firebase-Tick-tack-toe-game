@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.tableCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body {
   background-color: lightblue;
 }
@@ -63,6 +68,19 @@ h3 {
   display: none;
 }
 
+.initActiveGame {
+  color: black;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+table, th, td {
+  border: 1px solid;
+}
 /****************************************************************
 // active lobby Page
 ****************************************************************/

@@ -16,15 +16,26 @@ var fb_playerTurn = {
 }
 
 /**************************************************************/
-// fb_readOnRec(_path, _key, _data, _function)
-// Initilise a readon on a firebase record
-// Input:  path & key of record to read and where to save it
+// fb_createPendingLobby()
+// Call the functions and create the pending game lobby
+// Input:
 // Return:  
 /**************************************************************/
 function fb_createPendingLobby() {
   fb_readAll(PLAYER_DETAILS, processPendingLobby);
   ui_pageSwap("s_lobbyP", "s_pendingP");
 }
+
+/**************************************************************/
+// fb_initActiveGame()
+// Initilises the TTT active game 
+// Input:
+// Return:  
+/**************************************************************/
+function fb_initActiveGame() {
+  alert("this button is currently useless");
+}
+
 /**************************************************************/
 // fb_readOnRec(_path, _key, _data, _function)
 // Initilise a readon on a firebase record
