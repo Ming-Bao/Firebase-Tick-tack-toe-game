@@ -113,6 +113,7 @@ function reg_validate(_input, _regEX, _minNum, _maxNum) {
       }
     }
   } else {
+    //invalid input
     errMsg = "error";
   }
   return errMsg
