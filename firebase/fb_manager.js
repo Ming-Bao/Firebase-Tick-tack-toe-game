@@ -205,7 +205,8 @@ function fb_processPlayerDetails(_status, _data) {
 // Return: n/a
 /**************************************************************/
 function processPendingLobby(_status, _dbData) {
-
+  fb_removeRow()
+  
   _dbData.forEach(
     function(_currentRec) {
       var city = _currentRec.val().city
@@ -214,6 +215,16 @@ function processPendingLobby(_status, _dbData) {
   )
 }
 
+/**************************************************************/
+// fb_removeRow()
+// removes all the rows in the table
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_removeRow() {
+  var table = document.getElementById("t_gameLobby");
+  table.innerHTML = ""
+}
 /**************************************************************/
 // fb_addToTable()
 // Stores database record
