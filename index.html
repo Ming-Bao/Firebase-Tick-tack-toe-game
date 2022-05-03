@@ -127,8 +127,8 @@
 **************************************************************-->
 <div id="s_lobbyP" class="s_lobbyP absoluteCenter">
   <h1> Game Lobby </h1>
-  <button onclick="" id=""> Create Game </button>
-  <button onclick="fb_createPendingLobby()" id=""> Join Game </button>
+  <button onclick="fb_createPendingLobby()" id=""> Create Game </button>
+  <button onclick="fb_createPendingTable()" id=""> Join Game </button>
 </div>
 
 <!--*************************************************************
@@ -145,13 +145,13 @@
         </tr>
     </thead>
 
-    <tbody class="w3-container">
+    <tbody id="t_gameLobbyBody" class="w3-container">
         <tr>
 
         </tr>
     </tbody>
 </table>
-  <button onclick="ui_pageSwap('s_pendingP', 's_gameP')"> Local Game </button>
+  <button class="centerButton w3-container" onclick="ui_pageSwap('s_pendingP', 's_gameP')"> Local Game </button>
 </div>
 
 <!--*************************************************************

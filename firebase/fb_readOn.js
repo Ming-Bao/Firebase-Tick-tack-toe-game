@@ -1,4 +1,3 @@
-
 // pending lobby info
 var fb_pendingLobby = {
 
@@ -6,12 +5,24 @@ var fb_pendingLobby = {
 
 // active lobby info
 var fb_activeLobby = {
-  gameName: ''
+  gameName: '',
+  pendingStatus: false
 }
 
 // two player back and forth info
 var fb_playerTurn = {
 
+}
+
+/**************************************************************/
+// fb_createPendingTable()
+// Call the functions and create the pending game lobby
+// Input:
+// Return:  
+/**************************************************************/
+function fb_createPendingTable() {
+  fb_readAll(PENDING_LOBBY, processPendingLobby);
+  ui_pageSwap("s_lobbyP", "s_pendingP");
 }
 
 /**************************************************************/
@@ -21,19 +32,8 @@ var fb_playerTurn = {
 // Return:  
 /**************************************************************/
 function fb_createPendingLobby() {
-  fb_readAll(PLAYER_DETAILS, processPendingLobby);
-  ui_pageSwap("s_lobbyP", "s_pendingP");
-}
-
-/**************************************************************/
-// fb_createActiveLobby()
-// Call the functions and create the pending game lobby
-// Input:
-// Return:  
-/**************************************************************/
-function fb_createActiveLobby() {
-  fb_activeLobby.gameName = prompt("what is your game name?")
-  fb_writeRec()
+  fb_activeLobby.gameName = prompt("what is your game name?");
+  fb_writeRec(PENDING_LOBBY, fb_activeLobby.gameName, fb_activeLobby)
 }
 
 /**************************************************************/

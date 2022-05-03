@@ -5,6 +5,8 @@
 const PLAYER_DETAILS = "playerDetails";
 const ADMIN = "admin";
 const PLACE_HOLDER = "PlaceHolder";
+const PENDING_LOBBY = "pendingLobby";
+const ACTIVE_LOBBY = "activeLobby";
 
 // world variables
 var loginStatus = ' ';
@@ -209,7 +211,7 @@ function processPendingLobby(_status, _dbData) {
   
   _dbData.forEach(
     function(_currentRec) {
-      var city = _currentRec.val().city
+      var city = _currentRec.val().gameName
       fb_addToTable(city);
     }
   )
@@ -222,9 +224,27 @@ function processPendingLobby(_status, _dbData) {
 // Return: n/a
 /**************************************************************/
 function fb_removeRow() {
-  var table = document.getElementById("t_gameLobby");
-  table.innerHTML = ""
+  // var table = document.getElementById("t_gameLobby");
+  // table.innerHTML = ""
+
+  // var row = table.insertRow(-1)
+
+  // var cell1 = row.insertCell(0)
+  // var cell2 = row.insertCell(1)
+
+  // cell1.innerHTML = "Host Name"
+  // cell1.className = "w3-container tableCenter"
+  // cell2.innerHTML = "Join Button"
+  // cell2.className = "w3-container tableCenter"
+
+  var tableHeaderRowCount = 1;
+  var table = document.getElementById('t_gameLobby');
+  var rowCount = table.rows.length;
+  for (var i = tableHeaderRowCount; i < rowCount; i++) {
+    table.deleteRow(tableHeaderRowCount);
+  }
 }
+
 /**************************************************************/
 // fb_addToTable()
 // Stores database record
@@ -232,9 +252,7 @@ function fb_removeRow() {
 // Return: n/a
 /**************************************************************/
 function fb_addToTable(_data) {
-
   var table = document.getElementById("t_gameLobby");
-
   var row = table.insertRow(-1)
 
   var cell1 = row.insertCell(0)
