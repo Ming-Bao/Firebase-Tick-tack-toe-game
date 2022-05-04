@@ -14,7 +14,6 @@ var ttt_player = [{
   win: 0,
   loss: 0,
   draw: 0
-  
 }]
 
 var ttt_playerTurn = 1

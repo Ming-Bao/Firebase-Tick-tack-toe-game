@@ -6,6 +6,7 @@ var fb_pendingLobby = {
 // active lobby info
 var fb_activeLobby = {
   gameName: '',
+  timeStamp: '',
   pendingStatus: false
 }
 
@@ -33,7 +34,17 @@ function fb_createPendingTable() {
 /**************************************************************/
 function fb_createPendingLobby() {
   fb_activeLobby.gameName = prompt("what is your game name?");
-  fb_writeRec(PENDING_LOBBY, fb_activeLobby.gameName, fb_activeLobby)
+
+  const time = new Date();
+  var minute = time.getUTCMinutes();
+  var hour = time.getUTCHours();
+  var day = time.getUTCDate();
+  var month = time.getUTCMonth() + 1;
+  fb_activeLobby.timeStamp = day + "/" + month + " " + hour + ":" + minute;
+
+  fb_writeRec(PENDING_LOBBY, fb_activeLobby.gameName, fb_activeLobby);
+  ui_pageSwap("s_lobbyP", "s_activeP");
+  fb_readOnRec(PENDING_LOBBY, fb_activeLobby.gameName, PENDING_STATUS)
 }
 
 /**************************************************************/
