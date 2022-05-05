@@ -1,13 +1,13 @@
 // pending lobby info
 var fb_pendingLobby = {
-
+  gameName: '',
+  timeStamp: '',
+  pendingStatus: false
 }
 
 // active lobby info
 var fb_activeLobby = {
-  gameName: '',
-  timeStamp: '',
-  pendingStatus: false
+
 }
 
 // two player back and forth info
@@ -33,7 +33,7 @@ function fb_createPendingTable() {
 // Return:  
 /**************************************************************/
 function fb_createPendingLobby() {
-  fb_activeLobby.gameName = prompt("what is your game name?");
+  fb_pendingLobby.gameName = prompt("what is your game name?");
 
   const time = new Date();
   var minute = time.getUTCMinutes();
@@ -41,12 +41,12 @@ function fb_createPendingLobby() {
   var day = time.getUTCDate();
   var month = time.getUTCMonth() + 1;
   var year = time.getUTCFullYear();
-  fb_activeLobby.timeStamp = day + "/" + month + "/" + year + " " + hour + ":" + minute;
-  console.log(fb_activeLobby.timeStamp)
+  fb_pendingLobby.timeStamp = day + "/" + month + "/" + year + " " + hour + ":" + minute;
+  console.log(fb_pendingLobby.timeStamp)
 
-  fb_writeRec(PENDING_LOBBY, fb_activeLobby.gameName, fb_activeLobby);
+  fb_writeRec(PENDING_LOBBY, fb_pendingLobby.gameName, fb_pendingLobby);
   ui_pageSwap("s_lobbyP", "s_activeP");
-  // fb_readOnRec(PENDING_LOBBY, fb_activeLobby.gameName, PENDING_STATUS)
+  // fb_readOnRec(PENDING_LOBBY, fb_pendingLobby.gameName, PENDING_STATUS)
 }
 
 /**************************************************************/
