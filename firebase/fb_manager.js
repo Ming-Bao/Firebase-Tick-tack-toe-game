@@ -212,8 +212,9 @@ function processPendingLobby(_status, _dbData) {
   
   _dbData.forEach(
     function(_currentRec) {
-      var city = _currentRec.val().gameName
-      fb_addToTable(city);
+      var gameName = _currentRec.val().gameName
+      var timeStamp = _currentRec.val().timeStamp
+      fb_addToTable(gameName, timeStamp);
     }
   )
 }
@@ -224,21 +225,23 @@ function processPendingLobby(_status, _dbData) {
 // Input: n/a
 // Return: n/a
 /**************************************************************/
-function fb_addToTable(_data) {
+function fb_addToTable(_gameName, _timeStamp) {
   var table = document.getElementById("t_gameLobby");
   var row = table.insertRow(-1)
 
   var cell1 = row.insertCell(0)
   var cell2 = row.insertCell(1)
+  var cell3 = row.insertCell(2)
 
-  cell1.innerHTML = _data
+  cell1.innerHTML = _gameName
+  cell2.innerHTML = _timeStamp
   
   var btn = document.createElement('input');
   btn.type = "button";
   btn.className = "initActiveGame";
   btn.value = "Join Game";
   btn.onclick = fb_initActiveGame;
-  cell2.appendChild(btn);
+  cell3.appendChild(btn);
 }
 
 /**************************************************************/

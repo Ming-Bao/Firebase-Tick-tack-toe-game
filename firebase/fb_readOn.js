@@ -40,11 +40,13 @@ function fb_createPendingLobby() {
   var hour = time.getUTCHours();
   var day = time.getUTCDate();
   var month = time.getUTCMonth() + 1;
-  fb_activeLobby.timeStamp = day + "/" + month + " " + hour + ":" + minute;
+  var year = time.getUTCFullYear();
+  fb_activeLobby.timeStamp = day + "/" + month + "/" + year + " " + hour + ":" + minute;
+  console.log(fb_activeLobby.timeStamp)
 
   fb_writeRec(PENDING_LOBBY, fb_activeLobby.gameName, fb_activeLobby);
   ui_pageSwap("s_lobbyP", "s_activeP");
-  fb_readOnRec(PENDING_LOBBY, fb_activeLobby.gameName, PENDING_STATUS)
+  // fb_readOnRec(PENDING_LOBBY, fb_activeLobby.gameName, PENDING_STATUS)
 }
 
 /**************************************************************/
