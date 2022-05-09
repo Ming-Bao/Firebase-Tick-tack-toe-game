@@ -8,7 +8,7 @@ var ttt_player = [{
   loss: 0,
   draw: 0
 },
-              {
+            {
   userName: "Steven O",
   symbol: "O",  
   win: 0,

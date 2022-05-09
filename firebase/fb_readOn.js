@@ -7,7 +7,12 @@ var fb_pendingLobby = {
 
 // active lobby info
 var fb_activeLobby = {
-
+  player1:{
+    move: ""
+  },
+  player2:{
+    move:""
+  }
 }
 
 // two player back and forth info
@@ -55,8 +60,9 @@ function fb_createPendingLobby() {
 // Input:
 // Return:  
 /**************************************************************/
-function fb_initActiveGame() {
-  alert("this button is currently useless");
+function fb_initActiveGame(_key) {
+  fb_overWriteRec(PENDING_LOBBY, _key, "pendingStatus", true);
+  fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby)
 }
 
 /**************************************************************/

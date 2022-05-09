@@ -133,6 +133,28 @@ function fb_writeRec(_path, _key, _data) {
 }
 
 /**************************************************************/
+// fb_writeRec(_path, _key, _key2, _data)
+// Over writes a specific record & key to the DB
+// Input:  path to write to, the key, the second key, data to write
+// Return: 
+/**************************************************************/
+function fb_overWriteRec(_path, _key, _key2, _data) {
+  console.log('fb_overWriteRec: path= ' + _path + '  key= ' + _key + 'key2= ' + _key2 + 'data= ' + _data.name + '/' + _data.score);
+
+  writeStatus = "waiting";
+  firebase.database().ref(_path + '/' + _key + '/' + _key2).set(_data,
+    function (error) {
+      if (error) {
+        writeStatus = "failure";
+        console.log(error);
+      } else {
+        writeStatus = "OK";
+      }
+    });
+  console.log("fb_overWriteRec: exit");
+}
+
+/**************************************************************/
 // fb_readAll(_path, _data)
 // Read all DB records for the path
 // Input:  path to read from and Function name that processs the data
@@ -238,9 +260,9 @@ function fb_addToTable(_gameName, _timeStamp) {
   
   var btn = document.createElement('input');
   btn.type = "button";
-  btn.className = "initActiveGame";
+  btn.className = "BTNinitActiveGame";
   btn.value = "Join Game";
-  btn.onclick = fb_initActiveGame;
+  btn.onclick = () => { fb_initActiveGame(_gameName);}
   cell3.appendChild(btn);
 }
 
