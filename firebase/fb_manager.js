@@ -133,7 +133,7 @@ function fb_writeRec(_path, _key, _data) {
 }
 
 /**************************************************************/
-// fb_writeRec(_path, _key, _key2, _data)
+// fb_overWriteRec(_path, _key, _key2, _data)
 // Over writes a specific record & key to the DB
 // Input:  path to write to, the key, the second key, data to write
 // Return: 
@@ -152,6 +152,28 @@ function fb_overWriteRec(_path, _key, _key2, _data) {
       }
     });
   console.log("fb_overWriteRec: exit");
+}
+
+/**************************************************************/
+// fb_deleteRec(_path)
+// Write a specific record & key to the DB
+// Input:  path to write to, the key, data to write
+// Return: 
+/**************************************************************/
+function fb_deleteRec(_path) {
+  console.log('fb_deleteRec: path= ' + _path);
+
+  writeStatus = "waiting";
+  firebase.database().ref(_path + '/' + _key).set(null,
+    function (error) {
+      if (error) {
+        writeStatus = "failure";
+        console.log(error);
+      } else {
+        writeStatus = "OK";
+      }
+    });
+  console.log("fb_writeRec: exit");
 }
 
 /**************************************************************/
