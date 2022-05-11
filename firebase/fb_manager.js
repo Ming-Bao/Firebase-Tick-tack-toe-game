@@ -4,6 +4,7 @@
 // firebase paths
 const PLAYER_DETAILS = "playerDetails";
 const ADMIN = "admin";
+const SCORE = "score"
 const PLACE_HOLDER = "PlaceHolder";
 const PENDING_LOBBY = "pendingLobby";
 const ACTIVE_LOBBY = "activeLobby";
@@ -309,6 +310,7 @@ function fb_processLogin(_result) {
   console.log("result = " + _result)
   if (_result == "OK") {
     ui_pageSwap("s_startP", "s_lobbyP");
+    fb_readRec(SCORE, playerDetails.uid, false, fb_processScore)
     fb_readRec(ADMIN, playerDetails.uid, false, fb_processAdmin);
   }
   else {
@@ -318,6 +320,15 @@ function fb_processLogin(_result) {
   }
 }
 
+/**************************************************************/
+// fb_processAdmin()
+// Process if the user is a admin or not
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_processScore(_status, _dbData) {
+  fb_score.localPlayer = _dbData;
+}
 /**************************************************************/
 // fb_processAdmin()
 // Process if the user is a admin or not

@@ -79,6 +79,7 @@ function reg_BTN() {
   // if input are good then
   if (flag == true){
   fb_writeRec(PLAYER_DETAILS, playerDetails.uid, playerDetails);
+  fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
   //fb_readRec(ADMIN, playerDetails.uid, false, fb_processAdmin);
   //ui_gamePageReaveal();
   ui_pageSwap("s_regP", "s_lobbyP");
