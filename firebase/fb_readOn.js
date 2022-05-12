@@ -26,14 +26,14 @@ var fb_activeLobby = {
 
 var fb_score = {
   localPlayer: {
-    wins: "0",
-    loss: "0",
-    draw: "0"
+    wins: 0,
+    loss: 0,
+    draw: 0
   },
   onlinePlayer: {
-    wins: "0",
-    loss: "0",
-    draw: "0"    
+    wins: 0,
+    loss: 0,
+    draw: 0    
   }
 }
 
@@ -89,12 +89,12 @@ function fb_createPendingLobby() {
 function fb_initActiveGame(_key) {
   fb_activeLobby.player2.loss = fb_score.localPlayer.loss
   fb_activeLobby.player2.draw = fb_score.localPlayer.draw
-  fb_activeLobby.player2.wins = 1234 //fb_score.localPlayer.wins
-
+  fb_activeLobby.player2.wins = fb_score.localPlayer.wins
+  console.log("fb_score= " + fb_score)
   fb_overWriteRec(PENDING_LOBBY, _key, "pendingStatus", true);
   fb_overWriteRec(PENDING_LOBBY, _key, "uid", playerDetails.uid);
   fb_activeLobby.player2.name = playerDetails.name
-  console.log(fb_activeLobby)
+  console.log("fb_activeLobby= " + fb_activeLobby)
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
 }
 

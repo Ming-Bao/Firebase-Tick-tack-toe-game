@@ -327,6 +327,7 @@ function fb_processLogin(_result) {
 // Return: n/a
 /**************************************************************/
 function fb_processScore(_status, _dbData) {
+  console.log(_dbData)
   fb_score.localPlayer = _dbData;
 }
 /**************************************************************/
