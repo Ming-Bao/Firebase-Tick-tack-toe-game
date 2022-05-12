@@ -8,16 +8,16 @@ var fb_pendingLobby = {
 // active lobby info
 var fb_activeLobby = {
   player1:{
-    wins: "",
-    loss: "",
-    draw: "",
+    wins: 0,
+    loss: 0,
+    draw: 0,
     name: "",
     move: ""
   },
   player2:{
-    wins: "",
-    loss: "",
-    draw: "",
+    wins: 0,
+    loss: 0,
+    draw: 0,
     name: "",
     move: "",
     uid: ""
@@ -77,7 +77,7 @@ function fb_createPendingLobby() {
 
   fb_writeRec(PENDING_LOBBY, fb_pendingLobby.gameName, fb_pendingLobby);
   ui_pageSwap("s_lobbyP", "s_activeP");
-  fb_readOnRec(PENDING_LOBBY, fb_pendingLobby.gameName + '/' + "pendingStatus", fb_readOnActiveLobby)
+  fb_readOnRec(PENDING_LOBBY, fb_pendingLobby.gameName + '/' + "pendingStatus", fb_readOnPendingStatus)
 }
 
 /**************************************************************/
@@ -90,12 +90,14 @@ function fb_initActiveGame(_key) {
   fb_activeLobby.player2.loss = fb_score.localPlayer.loss
   fb_activeLobby.player2.draw = fb_score.localPlayer.draw
   fb_activeLobby.player2.wins = fb_score.localPlayer.wins
-  console.log("fb_score= " + fb_score)
+
   fb_overWriteRec(PENDING_LOBBY, _key, "pendingStatus", true);
   fb_overWriteRec(PENDING_LOBBY, _key, "uid", playerDetails.uid);
   fb_activeLobby.player2.name = playerDetails.name
-  console.log("fb_activeLobby= " + fb_activeLobby)
+  console.log(fb_activeLobby)
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
+  fb_readOnRec(ACTIVE_LOBBY, "player1" + "/" + "move", fb_readOnPlayer1Move)
+  ui_pageSwap("s_pendingP", "s_gameP");
 }
 
 /**************************************************************/
@@ -128,16 +130,47 @@ function fb_readOnRec(_path, _key, _processFunc) {
   }
 
 /**************************************************************/
-// fb_readOnActiveLobby(_readStatus, _data)
+// fb_readOnPendingStatus(_readStatus, _data)
 // called by fb_readOnRec
-// Input:  path & key of record to read and where to save it
+// Input:
 // Return:  
 /**************************************************************/
-  function fb_readOnActiveLobby(_readStatus, _data) {
+function fb_readOnPendingStatus(_readStatus, _data) {
     if (_data == true) {
       fb_readRec(PENDING_LOBBY, fb_pendingLobby.gameName, false, fb_processP2UID)
-    }
+      console.log(fb_activeLobby.player1)
+      console.log(fb_score.localPlayer)
+      fb_activeLobby.player1.loss = fb_score.localPlayer.loss
+      fb_activeLobby.player1.draw = fb_score.localPlayer.draw
+      fb_activeLobby.player1.wins = fb_score.localPlayer.wins
+      fb_activeLobby.player1.name = playerDetails.name;
+      fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
+      //fb_readOnRec(ACTIVE_LOBBY, "player2" + "/" + "move", fb_readOnPlayer2Move)
+      ui_pageSwap("s_activeP", "s_gameP");
   }
+}
+
+/**************************************************************/
+// fb_readOnPlayer1Move(_readStatus, _data)
+// called by fb_readOnRec initiacites a readon on the player1
+// moves path in firebase
+// Input:
+// Return:  
+/**************************************************************/
+function fb_readOnPlayer1Move(_readStatus, _data) {
+
+}
+
+/**************************************************************/
+// fb_readOnPlayer1Move(_readStatus, _data)
+// called by fb_readOnRec initiacites a readon on the player1
+// moves path in firebase
+// Input:
+// Return:  
+/**************************************************************/
+function fb_readOnPlayer2Move(_readStatus, _data) {
+
+}
 
 /**************************************************************/
 // fb_processP2UID(_readStatus, _data)

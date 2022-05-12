@@ -321,14 +321,15 @@ function fb_processLogin(_result) {
 }
 
 /**************************************************************/
-// fb_processAdmin()
-// Process if the user is a admin or not
+// fb_processScore()
+// Puts the user's score from Score path into the fb_score object
 // Input: n/a
 // Return: n/a
 /**************************************************************/
 function fb_processScore(_status, _dbData) {
-  console.log(_dbData)
-  fb_score.localPlayer = _dbData;
+  fb_score.localPlayer.wins = _dbData.wins;
+  fb_score.localPlayer.loss = _dbData.loss;
+  fb_score.localPlayer.draw = _dbData.draw;
 }
 /**************************************************************/
 // fb_processAdmin()
