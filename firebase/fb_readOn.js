@@ -96,7 +96,7 @@ function fb_initActiveGame(_key) {
   fb_activeLobby.player2.name = playerDetails.name
   console.log(fb_activeLobby)
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
-  fb_readOnRec(ACTIVE_LOBBY, "player1" + "/" + "move", fb_readOnPlayer1Move)
+  fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
   ui_pageSwap("s_pendingP", "s_gameP");
 }
 
@@ -156,7 +156,7 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 // Return:  
 /**************************************************************/
 function fb_readOnPlayer1Move(_readStatus, _data) {
-
+  console.log("readon player 1 data= " + _data)
 }
 
 /**************************************************************/
@@ -167,7 +167,7 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
 // Return:  
 /**************************************************************/
 function fb_readOnPlayer2Move(_readStatus, _data) {
-
+  console.log("readon player 2 data= " + _data)
 }
 
 /**************************************************************/
