@@ -1,6 +1,11 @@
 /********************************************************/
 // Variables, constants and all that other good stuff
 /********************************************************/
+// constants
+const p1Num = 0
+const p2Num = 1
+
+// all the details about the ttt game
 var ttt_player = [{
     userName: "Ming X",
     symbol: "x",

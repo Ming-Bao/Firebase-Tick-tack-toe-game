@@ -157,6 +157,7 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 /**************************************************************/
 function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("readon player 1 data= " + _data)
+
 }
 
 /**************************************************************/
