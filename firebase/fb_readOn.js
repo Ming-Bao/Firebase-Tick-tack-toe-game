@@ -113,12 +113,12 @@ function fb_readOnRec(_path, _key, _processFunc) {
     firebase.database().ref(_path + '/' + _key).on("value", gotRecord, readErr);
   
     function gotRecord(snapshot) {
-      if (snapshot.val() == null) {
+      let dbData = snapshot.val();
+      if (dbData == null) {
         readStatus = "no record";
         _processFunc(readStatus);
       } else {
         readStatus = "OK";
-        let dbData = snapshot.val();
         _processFunc(readStatus, dbData);
       }
     }
@@ -136,17 +136,15 @@ function fb_readOnRec(_path, _key, _processFunc) {
 // Return:  
 /**************************************************************/
 function fb_readOnPendingStatus(_readStatus, _data) {
-    if (_data == true) {
-      fb_readRec(PENDING_LOBBY, fb_pendingLobby.gameName, false, fb_processP2UID)
-      console.log(fb_activeLobby.player1)
-      console.log(fb_score.localPlayer)
-      fb_activeLobby.player1.loss = fb_score.localPlayer.loss
-      fb_activeLobby.player1.draw = fb_score.localPlayer.draw
-      fb_activeLobby.player1.wins = fb_score.localPlayer.wins
-      fb_activeLobby.player1.name = playerDetails.name;
-      fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
-      //fb_readOnRec(ACTIVE_LOBBY, "player2" + "/" + "move", fb_readOnPlayer2Move)
-      ui_pageSwap("s_activeP", "s_gameP");
+  console.log("fb_readOnPendingStatus: data = " + _data);
+
+  if (_data == true) {
+    fb_readRec(PENDING_LOBBY, fb_pendingLobby.gameName, false, fb_processP2UID)
+    fb_activeLobby.player1.loss = fb_score.localPlayer.loss
+    fb_activeLobby.player1.draw = fb_score.localPlayer.draw
+    fb_activeLobby.player1.wins = fb_score.localPlayer.wins
+    fb_activeLobby.player1.name = playerDetails.name;
+    ui_pageSwap("s_activeP", "s_gameP");
   }
 }
 
@@ -174,12 +172,17 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
 
 /**************************************************************/
 // fb_processP2UID(_readStatus, _data)
-// called by fb_readOnRec
+// called by fb_readOnPendingStatus
 // Input:  path & key of record to read and where to save it
 // Return:  
 /**************************************************************/
   function fb_processP2UID (_status, _data) {
-    fb_activeLobby.player2.uid = _data.uid
+    console.log("fb_processP2UID");
+    fb_activeLobby.player2.uid = _data.uid;
+    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
+    fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move)
+    console.log(fb_pendingLobby.gameName)
+    fb_deleteRec(PENDING_LOBBY, "Johnny");
   }
 
 /**************************************************************/
