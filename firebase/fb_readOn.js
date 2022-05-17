@@ -182,7 +182,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
     fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move)
     console.log(fb_pendingLobby.gameName)
-    fb_deleteRec(PENDING_LOBBY, "Johnny");
+    fb_deleteRec(PENDING_LOBBY, fb_pendingLobby.gameName);
   }
 
 /**************************************************************/
