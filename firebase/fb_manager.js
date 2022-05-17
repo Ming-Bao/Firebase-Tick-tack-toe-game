@@ -183,7 +183,7 @@ function fb_overWriteRec(_path, _key, _key2, _data) {
 // Input:  path to write to, the key, data to write
 // Return: 
 /**************************************************************/
-function fb_deleteRec(_path) {
+function fb_deleteRec(_path, _key) {
   console.log('fb_deleteRec: path= ' + _path);
 
   writeStatus = "waiting";
