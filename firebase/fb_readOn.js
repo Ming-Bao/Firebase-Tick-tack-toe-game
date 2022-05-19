@@ -98,6 +98,8 @@ function fb_initActiveGame(_key) {
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
   ui_pageSwap("s_pendingP", "s_gameP");
+  ttt_playerTurn = 1
+  //this is player 2 so disable all the buttons so they they can't make a move
 }
 
 /**************************************************************/
@@ -150,25 +152,28 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 
 /**************************************************************/
 // fb_readOnPlayer1Move(_readStatus, _data)
-// called by fb_readOnRec initiacites a readon on the player1
-// moves path in firebase
-// Input:
-// Return:  
+// called by fb_readOnRec, processed the move by player 1
+// this is player 2
 /**************************************************************/
 function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("readon player 1 data= " + _data)
-
+  //checks if player1 has won or not
+  //if won then alert and clear board and update the scores both locally and in the scores path in database
+  //update the grid with player1's move
+  //unlocks all the pieces of the grid that has no symbols on it
 }
 
 /**************************************************************/
-// fb_readOnPlayer1Move(_readStatus, _data)
-// called by fb_readOnRec initiacites a readon on the player1
-// moves path in firebase
-// Input:
-// Return:  
+// fb_readOnPlayer2Move(_readStatus, _data)
+// called by fb_readOnRec, processed the move by player 2
+// this is player 1
 /**************************************************************/
 function fb_readOnPlayer2Move(_readStatus, _data) {
-  console.log("readon player 2 data= " + _data)
+  console.log("readon player 2 data= " + _data);
+  //checks if player2 has won or lost
+  //if won then alert and clear board and update the scores both locally and in the scores path in database
+  //update the grid with player2's move
+  //unlocks all the pieces of the grid that has no symbols on it
 }
 
 /**************************************************************/
@@ -182,6 +187,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
     fb_activeLobby.player2.uid = _data.uid;
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
     fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move)
+    ttt_playerTurn = 0
     console.log(fb_pendingLobby.gameName)
     fb_deleteRec(PENDING_LOBBY, fb_pendingLobby.gameName);
   }

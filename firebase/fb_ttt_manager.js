@@ -47,7 +47,6 @@ var ttt_player = [{
   
     document.getElementById("btmText").innerHTML =
     ttt_player[ttt_playerTurn].userName + " Turn"
-    ttt_turnSwap();
     id.disabled = true;
     ttt_determinXO(_btnID)
     ttt_determinWin();
@@ -72,7 +71,6 @@ var ttt_player = [{
   function ttt_resetGame() {
     document.getElementById("btmText").innerHTML =
     ttt_player[ttt_playerTurn].userName + " Turn";
-    ttt_turnSwap();
     document.getElementById("resetBTN").style.display="none";
     
     for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
@@ -140,7 +138,6 @@ var ttt_player = [{
     document.getElementById("win" + ttt_playerTurn).innerHTML = 
     "wins: " + ttt_player[ttt_playerTurn].win
     
-    ttt_turnSwap()
     ttt_player[ttt_playerTurn].loss++
     document.getElementById("loss" + ttt_playerTurn).innerHTML = 
     "losses: " + ttt_player[ttt_playerTurn].loss
@@ -153,19 +150,11 @@ var ttt_player = [{
     document.getElementById("draw" + ttt_playerTurn).innerHTML = 
     "draws: " +  ttt_player[ttt_playerTurn].draw
     
-    ttt_turnSwap()
     ttt_player[ttt_playerTurn].draw++
     document.getElementById("draw" + ttt_playerTurn).innerHTML = 
     "draws: " +  ttt_player[ttt_playerTurn].draw
   }
-  
-  /********************************************************
-  // Changes ttt_playerSwap into either 0 or 1
-  /********************************************************/
-  function ttt_turnSwap() {
-    ttt_playerTurn = 1 - ttt_playerTurn
-  }
-  
+
   /**************************************************************/
   // END OF MODULE
   /**************************************************************/
