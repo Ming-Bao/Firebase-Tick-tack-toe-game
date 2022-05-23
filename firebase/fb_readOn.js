@@ -157,10 +157,58 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 /**************************************************************/
 function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("readon player 1 data= " + _data)
-  //checks if player1 has won or not
-  //if won then alert and clear board and update the scores both locally and in the scores path in database
+  console.log("this is player2")
+  var flag = false
+
+  //invalidates the first readon
+  if (_data == "") {
+    flag = true;
+  }
+
+  //checks if player1 has won
+  if (_data == "w") {
+    //if won then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("player 1 has won")
+  }
+
+  //checks if player1 has lost
+  if (_data == "l") {
+    //if lost then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("player 1 has lost")
+  }
+
+  //checks if player1 has drawed
+  if (_data == "d") {
+    //if drawed then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("you have drawed with player 1")
+  }
+
+funcArray = [winFunc,func2,func3]
+inputArray = ['w','l','d']
+
+for (i = 0; i++; i < testArray.length){
+  if(flag== false){
+    if(_data == testArray[i]){
+      flag = true
+      funcArray[i]
+    }
+  }
+}
+
+
+
+
+
+
+  //if the game hasn't ended
+  if (flag == false) {
   //update the grid with player1's move
   //unlocks all the pieces of the grid that has no symbols on it
+  alert("player 1 has made the move: " + _data)
+  }
 }
 
 /**************************************************************/
@@ -170,10 +218,41 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
 /**************************************************************/
 function fb_readOnPlayer2Move(_readStatus, _data) {
   console.log("readon player 2 data= " + _data);
-  //checks if player2 has won or lost
-  //if won then alert and clear board and update the scores both locally and in the scores path in database
+  console.log("this is player 1")
+  var flag = false
+
+  //invalidates the first readon
+  if (_data == "") {
+    flag = true;
+  }
+
+  //checks if player2 has won
+  if (_data == "w") {
+    //if won then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("player 2 has won")
+  }
+
+  //checks if player2 has lost
+  if (_data == "l") {
+    //if lost then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("player 2 has lost")
+  }
+
+  //checks if player2 has drawed
+  if (_data == "d") {
+    //if drawed then alert and clear board and update the scores both locally and in the scores path in database
+    flag = true
+    alert("you have drawed with player 2")
+  }
+
+  //if the game hasn't ended
+  if (flag == false) {
   //update the grid with player2's move
   //unlocks all the pieces of the grid that has no symbols on it
+  alert("player 2 has made the move: " + _data)
+  }
 }
 
 /**************************************************************/

@@ -101,7 +101,13 @@ var ttt_player = [{
         ttt_player[ttt_playerTurn].userName + " win"
         winFlag = true;
         document.getElementById("resetBTN").style.display="block";
-        ttt_addWinLoss();
+        ttt_addWin(ttt_playerTurn);
+        if (ttt_playerTurn == 0) {
+          ttt_addLoss(ttt_playerTurn + 1)
+        }
+        if (ttt_playerTurn == 1) {
+          ttt_addLoss(ttt_playerTurn - 1)
+        }
       }
     }
   
@@ -131,16 +137,23 @@ var ttt_player = [{
   }
   
   /********************************************************/
-  // adds wins or losses when someone wins
+  // adds wins when someone wins
   /********************************************************/
-  function ttt_addWinLoss() {
-    ttt_player[ttt_playerTurn].win++
-    document.getElementById("win" + ttt_playerTurn).innerHTML = 
-    "wins: " + ttt_player[ttt_playerTurn].win
-    
-    ttt_player[ttt_playerTurn].loss++
-    document.getElementById("loss" + ttt_playerTurn).innerHTML = 
-    "losses: " + ttt_player[ttt_playerTurn].loss
+  function ttt_addWin(_playerNum) {
+    console.log(_playerNum)
+    ttt_player[_playerNum].win++
+    document.getElementById("win" + _playerNum).innerHTML = 
+    "wins: " + ttt_player[_playerNum].win
+  }
+
+  /********************************************************/
+  // adds loss when someone loses
+  /********************************************************/
+  function ttt_addLoss(_playerNum) {
+    console.log(_playerNum)
+    ttt_player[_playerNum].loss++
+    document.getElementById("loss" + _playerNum).innerHTML = 
+    "losses: " + ttt_player[_playerNum].loss
   }
   /********************************************************
   // adds wins or losses when someone wins
@@ -149,10 +162,17 @@ var ttt_player = [{
     ttt_player[ttt_playerTurn].draw++
     document.getElementById("draw" + ttt_playerTurn).innerHTML = 
     "draws: " +  ttt_player[ttt_playerTurn].draw
-    
-    ttt_player[ttt_playerTurn].draw++
-    document.getElementById("draw" + ttt_playerTurn).innerHTML = 
-    "draws: " +  ttt_player[ttt_playerTurn].draw
+
+    if (ttt_playerTurn == 0){
+      ttt_player[ttt_playerTurn + 1].draw++
+      document.getElementById("draw" + "1").innerHTML = 
+      "draws: " +  ttt_player[ttt_playerTurn + 1].draw
+    }
+    if (ttt_playerTurn == 0){
+      ttt_player[ttt_playerTurn - 1].draw++
+      document.getElementById("draw" + "0").innerHTML = 
+      "draws: " +  ttt_player[ttt_playerTurn - 1].draw
+    }
   }
 
   /**************************************************************/
