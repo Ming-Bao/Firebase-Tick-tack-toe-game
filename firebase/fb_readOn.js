@@ -160,48 +160,18 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("this is player2")
   var flag = false
 
-  //invalidates the first readon
-  if (_data == "") {
-    flag = true;
-  }
+  var funcArray = [winFuncP2, loseFuncP2, drawFuncP2]
+  var inputArray = ['w','l','d', '']
 
-  //checks if player1 has won
-  if (_data == "w") {
-    //if won then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("player 1 has won")
-  }
-
-  //checks if player1 has lost
-  if (_data == "l") {
-    //if lost then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("player 1 has lost")
-  }
-
-  //checks if player1 has drawed
-  if (_data == "d") {
-    //if drawed then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("you have drawed with player 1")
-  }
-
-funcArray = [winFunc,func2,func3]
-inputArray = ['w','l','d']
-
-for (i = 0; i++; i < testArray.length){
-  if(flag== false){
-    if(_data == testArray[i]){
-      flag = true
-      funcArray[i]
+  for (var i = 0; i <= inputArray.length; i++){
+    if(flag == false){
+      if(_data == inputArray[i]){
+        console.log("player 2 for loop")
+        flag = true
+        funcArray[i]()
+      }
     }
   }
-}
-
-
-
-
-
 
   //if the game hasn't ended
   if (flag == false) {
@@ -209,6 +179,39 @@ for (i = 0; i++; i < testArray.length){
   //unlocks all the pieces of the grid that has no symbols on it
   alert("player 1 has made the move: " + _data)
   }
+}
+
+/**************************************************************/
+// Player 2 win, draw and loss functions
+// this is player 2
+/**************************************************************/
+function winFuncP2() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 1 has won")
+  ttt_addWin(ttt_playerTurn)
+  ttt_addLoss(ttt_playerTurn - 1)
+  ttt_resetGame()
+}
+
+function loseFuncP2() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 1 has lost")
+  ttt_addLoss(ttt_playerTurn)
+  ttt_addWin(ttt_playerTurn - 1)
+  ttt_resetGame()
+}
+
+function drawFuncP2() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 1 has draw")
+  ttt_addDraw()
+  ttt_resetGame()
 }
 
 /**************************************************************/
@@ -221,38 +224,58 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   console.log("this is player 1")
   var flag = false
 
-  //invalidates the first readon
-  if (_data == "") {
-    flag = true;
-  }
+  var funcArray = [winFuncP1, loseFuncP1, drawFuncP1]
+  var inputArray = ['w','l','d', '']
 
-  //checks if player2 has won
-  if (_data == "w") {
-    //if won then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("player 2 has won")
-  }
-
-  //checks if player2 has lost
-  if (_data == "l") {
-    //if lost then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("player 2 has lost")
-  }
-
-  //checks if player2 has drawed
-  if (_data == "d") {
-    //if drawed then alert and clear board and update the scores both locally and in the scores path in database
-    flag = true
-    alert("you have drawed with player 2")
+  for (var i = 0; i <= inputArray.length; i++){
+    if(flag == false){
+      if(_data == inputArray[i]){
+        console.log("player 1 for loop")
+        flag = true
+        funcArray[i]
+      }
+    }
   }
 
   //if the game hasn't ended
   if (flag == false) {
-  //update the grid with player2's move
-  //unlocks all the pieces of the grid that has no symbols on it
-  alert("player 2 has made the move: " + _data)
+    //update the grid with player2's move
+    //unlocks all the pieces of the grid that has no symbols on it
+    alert("player 2 has made the move: " + _data)
   }
+}
+
+/**************************************************************/
+// Player 1 win, draw and loss functions
+// this is player 1
+/**************************************************************/
+function winFuncP1() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 2 has win")
+  ttt_addWin(ttt_playerTurn)
+  ttt_addLoss(ttt_playerTurn + 1)
+  ttt_resetGame()
+}
+
+function loseFuncP1() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 2 has lose")
+  ttt_addLoss(ttt_playerTurn)
+  ttt_addWin(ttt_playerTurn + 1)
+  ttt_resetGame()
+}
+
+function drawFuncP1() {
+  // update score locally
+  // update score on firebase
+  // clear grid
+  alert("player 2 has draw")
+  ttt_addDraw()
+  ttt_resetGame()
 }
 
 /**************************************************************/
