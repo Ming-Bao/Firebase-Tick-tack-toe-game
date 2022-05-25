@@ -43,13 +43,20 @@ var ttt_btnClicked = ["", "", "", "", "", "", "", "", ""];
 // disables the button that's hit
 /********************************************************/
 function ttt_btnHit(_btnID) {
-  var id = document.getElementById(_btnID);
+  var id = document.getElementById("tttBTN" + _btnID);
 
   document.getElementById("btmText").innerHTML =
   ttt_player[ttt_playerTurn].userName + " Turn"
   id.disabled = true;
   ttt_determinXO(_btnID)
   ttt_determinWin();
+  ttt_lockUnclickedBTN();
+  if (ttt_playerTurn == 0) {
+    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", _btnID);
+  }
+  if (ttt_playerTurn == 1) {
+    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player2/move", _btnID);
+  }
 }
 
 /********************************************************/
@@ -57,7 +64,7 @@ function ttt_btnHit(_btnID) {
 // X and O is determined by ttt_playerTurn
 /********************************************************/
 function ttt_determinXO(_btnID) {
-  var id = document.getElementById(_btnID);
+  var id = document.getElementById("tttBTN" + _btnID);
 
   id.innerHTML = ttt_player[ttt_playerTurn].symbol;
   ttt_btnClicked[_btnID] = ttt_player[ttt_playerTurn].symbol;
@@ -74,7 +81,7 @@ function ttt_resetGame() {
   document.getElementById("resetBTN").style.display="none";
   
   for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
-    var id = document.getElementById(i);
+    var id = document.getElementById("tttBTN" + i);
     id.disabled = false;
     id.innerHTML = ""
     id.style.backgroundColor = "lightgray"
@@ -113,7 +120,7 @@ function ttt_determinWin() {
 
   if (winFlag == true) {
     for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
-      document.getElementById(i).disabled = true
+      document.getElementById("tttBTN" + i).disabled = true
     }
   }
 
@@ -155,6 +162,7 @@ function ttt_addLoss(_playerNum) {
   document.getElementById("loss" + _playerNum).innerHTML = 
   "losses: " + ttt_player[_playerNum].loss
 }
+
 /********************************************************
 // adds wins or losses when someone wins
 /********************************************************/
@@ -179,20 +187,24 @@ function ttt_addDraw() {
 // locks all the buttons that's not been clicked
 /********************************************************/
 function ttt_lockUnclickedBTN() {
+  console.log("ttt_lockUnclickedBTN")
+
   for (var i = 0; i <= ttt_btnClicked.length; i++) {
-    if (i == '') {
-      document.getElementById(_btnID).disabled = true
+    if (ttt_btnClicked[i] == '') {
+      document.getElementById("tttBTN" + i).disabled = true;
     }
   }
 }
 
 /********************************************************
-// locks all the buttons that's not been clicked
+// unlocks all the buttons that's not been clicked
 /********************************************************/
-function ttt_lockUnclickedBTN() {
+function ttt_unlockUnclickedBTN() {
+  console.log("ttt_unlockUnclickedBTN")
+
   for (var i = 0; i <= ttt_btnClicked.length; i++) {
-    if (i == '') {
-      document.getElementById(_btnID).disabled = false
+    if (ttt_btnClicked[i] == '') {
+      document.getElementById("tttBTN" + i).disabled = false;
     }
   }
 }

@@ -61,6 +61,7 @@
       <h1>Welcome to Tic Tac Toe Game</h1>
       <h2>Hit Login To Continue</h2>
 			<button class="w3-button w3-red" onclick="fb_login(playerDetails)"> Login </button>
+      <button class="w3-button w3-red" onclick="ui_pageSwap('s_startP', 's_gameP')"> local game </button>
       <p id="s_loginStatus">  </p>
     </div>
   </center>
@@ -189,29 +190,29 @@
   
     <!-- 3x3 game grid ****************************************-->
     <div class="w3-row">
-      <button class="tttbutton w3-third" id="0" onclick="ttt_btnHit(0)">
+      <button class="tttbutton w3-third" id="tttBTN0" onclick="ttt_btnHit(0)">
       </button>  
-      <button class="tttbutton w3-third" id="1" onclick="ttt_btnHit(1)">
+      <button class="tttbutton w3-third" id="tttBTN1" onclick="ttt_btnHit(1)">
       </button>
-      <button class="tttbutton w3-third" id="2" onclick="ttt_btnHit(2)">
+      <button class="tttbutton w3-third" id="tttBTN2" onclick="ttt_btnHit(2)">
       </button>
     </div>
   
      <div class="w3-row">
-      <button class="tttbutton w3-third" id="3" onclick="ttt_btnHit(3)">
+      <button class="tttbutton w3-third" id="tttBTN3" onclick="ttt_btnHit(3)">
       </button> 
-      <button class="tttbutton w3-third" id="4" onclick="ttt_btnHit(4)">
+      <button class="tttbutton w3-third" id="tttBTN4" onclick="ttt_btnHit(4)">
       </button>
-      <button class="tttbutton w3-third" id="5" onclick="ttt_btnHit(5)">
+      <button class="tttbutton w3-third" id="tttBTN5" onclick="ttt_btnHit(5)">
       </button>
     </div>
   
     <div class="w3-row">
-      <button class="tttbutton w3-third" id="6" onclick="ttt_btnHit(6)">
+      <button class="tttbutton w3-third" id="tttBTN6" onclick="ttt_btnHit(6)">
       </button> 
-      <button class="tttbutton w3-third" id="7" onclick="ttt_btnHit(7)">
+      <button class="tttbutton w3-third" id="tttBTN7" onclick="ttt_btnHit(7)">
       </button>
-      <button class="tttbutton w3-third" id="8" onclick="ttt_btnHit(8)">
+      <button class="tttbutton w3-third" id="tttBTN8" onclick="ttt_btnHit(8)">
       </button>
     </div>
   

@@ -99,6 +99,7 @@ function fb_initActiveGame(_key) {
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
   ui_pageSwap("s_pendingP", "s_gameP");
   ttt_playerTurn = 1
+  ttt_lockUnclickedBTN()
   //this is player 2 so disable all the buttons so they they can't make a move
 }
 
@@ -161,12 +162,13 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   var flag = false
 
   var funcArray = [winFuncP2, loseFuncP2, drawFuncP2]
-  var inputArray = ['w','l','d', '']
+  var inputArray = ['w','l','d']
 
+  if (_data == ''){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
     if(flag == false){
       if(_data == inputArray[i]){
-        console.log("player 2 for loop")
+        console.log("player 2 fb_readOnPlayer1Move loop")
         flag = true
         funcArray[i]()
       }
@@ -177,7 +179,9 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   if (flag == false) {
   //update the grid with player1's move
   //unlocks all the pieces of the grid that has no symbols on it
-  alert("player 1 has made the move: " + _data)
+  console.log("player 1 has made the move: " + _data)
+  ttt_btnHit(_data)
+  ttt_unlockUnclickedBTN()
   }
 }
 
@@ -225,12 +229,13 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   var flag = false
 
   var funcArray = [winFuncP1, loseFuncP1, drawFuncP1]
-  var inputArray = ['w','l','d', '']
+  var inputArray = ['w','l','d']
 
+  if (_data == ''){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
     if(flag == false){
       if(_data == inputArray[i]){
-        console.log("player 1 for loop")
+        console.log("player 1 fb_readOnPlayer2Move loop")
         flag = true
         funcArray[i]
       }
@@ -241,7 +246,9 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   if (flag == false) {
     //update the grid with player2's move
     //unlocks all the pieces of the grid that has no symbols on it
-    alert("player 2 has made the move: " + _data)
+    console.log("player 2 has made the move: " + _data)
+    ttt_btnHit(_data)
+    ttt_unlockUnclickedBTN()
   }
 }
 
