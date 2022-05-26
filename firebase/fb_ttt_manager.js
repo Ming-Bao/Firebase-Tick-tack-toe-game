@@ -55,7 +55,40 @@ function ttt_btnHit(_btnID) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", _btnID);
   }
   if (ttt_playerTurn == 1) {
-    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player2/move", _btnID);
+    fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", _btnID);
+  }
+}
+
+/********************************************************/
+// calls when the opposite person makes a move
+// passes the id of the button hit
+// disables the button that's hit
+/********************************************************/
+function fb_ttt_move(_btnID) {
+  console.log("fb_ttt_move: _btnID = " + _btnID);
+  if (isNaN(_btnID)) {
+    return;
+  }
+  
+  var id = document.getElementById("tttBTN" + _btnID);
+
+  document.getElementById("btmText").innerHTML =
+  ttt_player[ttt_playerTurn].userName + " Turn"
+  id.disabled = true;
+  ttt_determinXO(_btnID)
+  ttt_determinWin();
+  ttt_lockUnclickedBTN();
+  if (ttt_playerTurn == 0) {
+    id.innerHTML = ttt_player[ttt_playerTurn + 1].symbol;
+    ttt_btnClicked[_btnID] = ttt_player[ttt_playerTurn + 1].symbol;
+    id.style.fontSize = "300%";
+    id.style.backgroundColor = "aqua"
+  }
+  if (ttt_playerTurn == 1) {
+    id.innerHTML = ttt_player[ttt_playerTurn - 1].symbol;
+    ttt_btnClicked[_btnID] = ttt_player[ttt_playerTurn - 1].symbol;
+    id.style.fontSize = "300%";
+    id.style.backgroundColor = "aqua"
   }
 }
 
@@ -121,6 +154,13 @@ function ttt_determinWin() {
   if (winFlag == true) {
     for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
       document.getElementById("tttBTN" + i).disabled = true
+
+      if (ttt_playerTurn == 0) {
+        fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", "w");
+      }
+      if (ttt_playerTurn == 1) {
+        fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", "w");
+      }
     }
   }
 
@@ -137,6 +177,12 @@ function ttt_determinWin() {
         ttt_btnClicked[8] != ""){
       
       console.log("draw");
+      if (ttt_playerTurn == 0) {
+        fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", "d");
+      }
+      if (ttt_playerTurn == 1) {
+        fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", "d");
+      }
       document.getElementById("resetBTN").style.display="block";
       ttt_addDraw();
     }

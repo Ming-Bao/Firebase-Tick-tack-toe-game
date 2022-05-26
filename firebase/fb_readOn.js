@@ -1,4 +1,7 @@
 // pending lobby info
+
+var p2Flag = 'not set';
+
 var fb_pendingLobby = {
   gameName: '',
   timeStamp: '',
@@ -157,31 +160,33 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 // this is player 2
 /**************************************************************/
 function fb_readOnPlayer1Move(_readStatus, _data) {
-  console.log("readon player 1 data= " + _data)
-  console.log("this is player2")
-  var flag = false
+  console.log("fb_readOnPlayer1Move: player 1 data= " + _data)
+  console.log("fb_readOnPlayer1Move: this is player2")
+  //p2Flag = false;
 
   var funcArray = [winFuncP2, loseFuncP2, drawFuncP2]
   var inputArray = ['w','l','d']
 
-  if (_data == ''){flag = true}
+  if (_data == ''){p2Flag = true} 
+  else {p2Flag = false};
+
   for (var i = 0; i <= inputArray.length; i++){
-    if(flag == false){
+    if(_data != ''){
       if(_data == inputArray[i]){
-        console.log("player 2 fb_readOnPlayer1Move loop")
-        flag = true
+        console.log("fb_readOnPlayer1Move: player 2 fb_readOnPlayer1Move loop")
+        p2Flag = true
         funcArray[i]()
       }
     }
   }
-
+   console.log("fb_readOnPlayer1Move: flag: " + p2Flag + " data: " + _data)
   //if the game hasn't ended
-  if (flag == false) {
-  //update the grid with player1's move
-  //unlocks all the pieces of the grid that has no symbols on it
-  console.log("player 1 has made the move: " + _data)
-  ttt_btnHit(_data)
-  ttt_unlockUnclickedBTN()
+  if (_data != '' && _data != 'w' && _data != 'l' && _data != 'd') {
+    //update the grid with player1's move
+    //unlocks all the pieces of the grid that has no symbols on it
+    console.log("fb_readOnPlayer1Move: player 1 has made the move: " + _data)
+    fb_ttt_move(_data)
+    ttt_unlockUnclickedBTN()
   }
 }
 
@@ -193,10 +198,10 @@ function winFuncP2() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 1 has won")
   ttt_addWin(ttt_playerTurn)
   ttt_addLoss(ttt_playerTurn - 1)
-  ttt_resetGame()
+  ttt_lockUnclickedBTN()
+  alert("player 1 has won")
 }
 
 function loseFuncP2() {
@@ -247,7 +252,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
     //update the grid with player2's move
     //unlocks all the pieces of the grid that has no symbols on it
     console.log("player 2 has made the move: " + _data)
-    ttt_btnHit(_data)
+    fb_ttt_move(_data)
     ttt_unlockUnclickedBTN()
   }
 }
@@ -260,10 +265,10 @@ function winFuncP1() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 2 has win")
   ttt_addWin(ttt_playerTurn)
   ttt_addLoss(ttt_playerTurn + 1)
-  ttt_resetGame()
+  ttt_lockUnclickedBTN()
+  alert("player 2 has win")
 }
 
 function loseFuncP1() {
