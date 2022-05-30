@@ -1,7 +1,5 @@
 // pending lobby info
 
-var p2Flag = 'not set';
-
 var fb_pendingLobby = {
   gameName: '',
   timeStamp: '',
@@ -162,26 +160,26 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("fb_readOnPlayer1Move: player 1 data= " + _data)
   console.log("fb_readOnPlayer1Move: this is player2")
-  //p2Flag = false;
+  flag = false;
 
-  var funcArray = [winFuncP2, loseFuncP2, drawFuncP2]
-  var inputArray = ['w','l','d']
+  var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2]
+  var inputArray = ['w','l','d', 'c']
 
-  if (_data == ''){p2Flag = true} 
-  else {p2Flag = false};
+  if (_data === ''){flag = true} 
+  else {flag = false};
 
   for (var i = 0; i <= inputArray.length; i++){
     if(_data != ''){
       if(_data == inputArray[i]){
         console.log("fb_readOnPlayer1Move: player 2 fb_readOnPlayer1Move loop")
-        p2Flag = true
+        Flag = true
         funcArray[i]()
       }
     }
   }
-   console.log("fb_readOnPlayer1Move: flag: " + p2Flag + " data: " + _data)
+   console.log("fb_readOnPlayer1Move: flag: " + flag + " data: " + _data)
   //if the game hasn't ended
-  if (_data != '' && _data != 'w' && _data != 'l' && _data != 'd') {
+  if (flag == false) {
     //update the grid with player1's move
     //unlocks all the pieces of the grid that has no symbols on it
     console.log("fb_readOnPlayer1Move: player 1 has made the move: " + _data)
@@ -191,17 +189,18 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
 }
 
 /**************************************************************/
-// Player 2 win, draw and loss functions
+// Player 2 win, draw, clear and loss functions
 // this is player 2
 /**************************************************************/
 function winFuncP2() {
   // update score locally
   // update score on firebase
-  // clear grid
+  // clear grid 
+  alert("player 1 has won")
   ttt_addWin(ttt_playerTurn)
   ttt_addLoss(ttt_playerTurn - 1)
   ttt_lockUnclickedBTN()
-  alert("player 1 has won")
+  document.getElementById("resetBTN").style.display="block";
 }
 
 function loseFuncP2() {
@@ -211,7 +210,8 @@ function loseFuncP2() {
   alert("player 1 has lost")
   ttt_addLoss(ttt_playerTurn)
   ttt_addWin(ttt_playerTurn - 1)
-  ttt_resetGame()
+  ttt_lockUnclickedBTN()
+  document.getElementById("resetBTN").style.display="block";
 }
 
 function drawFuncP2() {
@@ -220,6 +220,11 @@ function drawFuncP2() {
   // clear grid
   alert("player 1 has draw")
   ttt_addDraw()
+  ttt_lockUnclickedBTN()
+  document.getElementById("resetBTN").style.display="block";
+}
+
+function clearFuncP2() {
   ttt_resetGame()
 }
 
@@ -233,8 +238,8 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   console.log("this is player 1")
   var flag = false
 
-  var funcArray = [winFuncP1, loseFuncP1, drawFuncP1]
-  var inputArray = ['w','l','d']
+  var funcArray = [winFuncP1, loseFuncP1, drawFuncP1, clearFuncP1]
+  var inputArray = ['w','l','d', 'c']
 
   if (_data == ''){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
@@ -264,11 +269,12 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
 function winFuncP1() {
   // update score locally
   // update score on firebase
-  // clear grid
+  // clear grid  
+  alert("player 2 has win")
   ttt_addWin(ttt_playerTurn)
   ttt_addLoss(ttt_playerTurn + 1)
   ttt_lockUnclickedBTN()
-  alert("player 2 has win")
+  document.getElementById("resetBTN").style.display="block";
 }
 
 function loseFuncP1() {
@@ -278,7 +284,8 @@ function loseFuncP1() {
   alert("player 2 has lose")
   ttt_addLoss(ttt_playerTurn)
   ttt_addWin(ttt_playerTurn + 1)
-  ttt_resetGame()
+  ttt_lockUnclickedBTN()
+  document.getElementById("resetBTN").style.display="block";
 }
 
 function drawFuncP1() {
@@ -287,6 +294,10 @@ function drawFuncP1() {
   // clear grid
   alert("player 2 has draw")
   ttt_addDraw()
+  document.getElementById("resetBTN").style.display="block";
+}
+
+function clearFuncP1() {
   ttt_resetGame()
 }
 
