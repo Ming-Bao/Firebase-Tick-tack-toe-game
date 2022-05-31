@@ -239,7 +239,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   var flag = false
 
   var funcArray = [winFuncP1, loseFuncP1, drawFuncP1, clearFuncP1]
-  var inputArray = ['w','l','d', 'c']
+  var inputArray = ['w','l','d','c']
 
   if (_data == ''){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
