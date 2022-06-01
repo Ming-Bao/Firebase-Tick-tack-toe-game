@@ -27,7 +27,7 @@ const ttt_ALLWINCOND = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
-  [0,4,6],
+  [0,3,6],
   [1,4,7],
   [2,5,8],
   [0,4,8],
@@ -65,32 +65,28 @@ function ttt_btnHit(_btnID) {
 // disables the button that's hit
 /********************************************************/
 function fb_ttt_move(_btnID) {
-  console.log("fb_ttt_move Outside: _btnID = " + _btnID);
-  if (_btnID != isNaN) {
-    console.log("fb_ttt_move Inside: _btnID = " + _btnID);
-    var id = document.getElementById("tttBTN" + _btnID);
+  console.log("fb_ttt_move _btnID = " + _btnID);
 
-    document.getElementById("btmText").innerHTML =
-    ttt_player[ttt_playerTurn].userName + " Turn"
-    document.getElementById("tttBTN" + (_btnID+1)).disabled = true;
-  
-    ttt_determinXO(_btnID)
-    ttt_determinWin();
-    ttt_lockUnclickedBTN();
-    console.log("below ttt_lockUnclickedBTN in fb_ttt_move")
-    if (ttt_playerTurn == 0) {
-      id.innerHTML = ttt_player[ttt_playerTurn + 1].symbol;
-      ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn + 1].symbol;
-      id.style.fontSize = "300%";
-      id.style.backgroundColor = "aqua"
-    }
-    if (ttt_playerTurn == 1) {
-      id.innerHTML = ttt_player[ttt_playerTurn - 1].symbol;
-      ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn - 1].symbol;
-      id.style.fontSize = "300%";
-      id.style.backgroundColor = "aqua"
-    }
-    console.log("below if statements in fb_ttt_move")
+  var id = document.getElementById("tttBTN" + _btnID);
+
+  document.getElementById("btmText").innerHTML =
+  ttt_player[ttt_playerTurn].userName + " Turn"
+  document.getElementById("tttBTN" + (_btnID+1)).disabled = true;
+
+  ttt_determinXO(_btnID)
+  ttt_determinWin();
+
+  if (ttt_playerTurn == 0) {
+    id.innerHTML = ttt_player[ttt_playerTurn + 1].symbol;
+    ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn + 1].symbol;
+    id.style.fontSize = "300%";
+    id.style.backgroundColor = "aqua"
+  }
+  if (ttt_playerTurn == 1) {
+    id.innerHTML = ttt_player[ttt_playerTurn - 1].symbol;
+    ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn - 1].symbol;
+    id.style.fontSize = "300%";
+    id.style.backgroundColor = "aqua"
   }
 }
 
@@ -144,20 +140,22 @@ function ttt_determinWin() {
     if (ttt_btnClicked[WINCONDARR[0]] == ttt_player[ttt_playerTurn].symbol && 
         ttt_btnClicked[WINCONDARR[1]] == ttt_player[ttt_playerTurn].symbol &&
         ttt_btnClicked[WINCONDARR[2]] == ttt_player[ttt_playerTurn].symbol) {
-      
-      console.log((ttt_player[ttt_playerTurn].userName) + " win")
-      document.getElementById("btmText").innerHTML =
-      ttt_player[ttt_playerTurn].userName + " win"
-      winFlag = true;
-      ttt_addWin(ttt_playerTurn);
-      if (ttt_playerTurn == 0) {
-        ttt_addLoss(ttt_playerTurn + 1)
+          
+          console.log("ttt_winNumbers: " + [WINCONDARR[0]] + [WINCONDARR[1]] + [WINCONDARR[2]] + ttt_player[ttt_playerTurn].symbol)
+          
+          console.log((ttt_player[ttt_playerTurn].userName) + " win")
+          document.getElementById("btmText").innerHTML =
+          ttt_player[ttt_playerTurn].userName + " win"
+          winFlag = true;
+          ttt_addWin(ttt_playerTurn);
+          if (ttt_playerTurn == 0) {
+            ttt_addLoss(ttt_playerTurn + 1)
+          }
+          if (ttt_playerTurn == 1) {
+            ttt_addLoss(ttt_playerTurn - 1)
+          }
+        }
       }
-      if (ttt_playerTurn == 1) {
-        ttt_addLoss(ttt_playerTurn - 1)
-      }
-    }
-  }
 
   if (winFlag == true) {
     for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
@@ -200,7 +198,6 @@ function ttt_determinWin() {
 // adds wins when someone wins
 /********************************************************/
 function ttt_addWin(_playerNum) {
-  console.log(_playerNum)
   ttt_player[_playerNum].win++
   document.getElementById("win" + _playerNum).innerHTML = 
   "wins: " + ttt_player[_playerNum].win
@@ -210,7 +207,6 @@ function ttt_addWin(_playerNum) {
 // adds loss when someone loses
 /********************************************************/
 function ttt_addLoss(_playerNum) {
-  console.log(_playerNum)
   ttt_player[_playerNum].loss++
   document.getElementById("loss" + _playerNum).innerHTML = 
   "losses: " + ttt_player[_playerNum].loss
@@ -257,7 +253,6 @@ function ttt_unlockUnclickedBTN() {
 
   for (var i = 0; i <= ttt_btnClicked.length; i++) {
     if (ttt_btnClicked[i] == '') {
-      console.log("tttBTN" + (i+1))
       document.getElementById("tttBTN" + (i+1)).disabled = false;
     }
   }

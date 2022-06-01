@@ -166,18 +166,17 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   var inputArray = ['w','l','d', 'c']
 
   if (_data === ''){flag = true} 
-  else {flag = false};
 
   for (var i = 0; i <= inputArray.length; i++){
     if(_data != ''){
       if(_data == inputArray[i]){
         console.log("fb_readOnPlayer1Move: player 2 fb_readOnPlayer1Move loop")
-        Flag = true
+        flag = true
         funcArray[i]()
       }
     }
   }
-   console.log("fb_readOnPlayer1Move: flag: " + flag + " data: " + _data)
+
   //if the game hasn't ended
   if (flag == false) {
     //update the grid with player1's move
@@ -197,8 +196,8 @@ function winFuncP2() {
   // update score on firebase
   // clear grid 
   alert("player 1 has won")
-  ttt_addWin(ttt_playerTurn)
-  ttt_addLoss(ttt_playerTurn - 1)
+  ttt_addWin(ttt_playerTurn - 1)
+  ttt_addLoss(ttt_playerTurn)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
 }
@@ -225,6 +224,8 @@ function drawFuncP2() {
 }
 
 function clearFuncP2() {
+  console.log("clear func p2")
+  fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'c');
   ttt_resetGame()
 }
 
@@ -247,7 +248,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
       if(_data == inputArray[i]){
         console.log("player 1 fb_readOnPlayer2Move loop")
         flag = true
-        funcArray[i]
+        funcArray[i]()
       }
     }
   }
@@ -271,8 +272,8 @@ function winFuncP1() {
   // update score on firebase
   // clear grid  
   alert("player 2 has win")
-  ttt_addWin(ttt_playerTurn)
-  ttt_addLoss(ttt_playerTurn + 1)
+  ttt_addWin(ttt_playerTurn + 1)
+  ttt_addLoss(ttt_playerTurn)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
 }
@@ -295,9 +296,12 @@ function drawFuncP1() {
   alert("player 2 has draw")
   ttt_addDraw()
   document.getElementById("resetBTN").style.display="block";
+  ttt_lockUnclickedBTN()
 }
 
 function clearFuncP1() {
+  console.log("clear func p1")
+  fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'c');
   ttt_resetGame()
 }
 
