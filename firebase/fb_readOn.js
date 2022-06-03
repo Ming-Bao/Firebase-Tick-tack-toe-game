@@ -160,7 +160,7 @@ function fb_readOnPendingStatus(_readStatus, _data) {
 function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("fb_readOnPlayer1Move: player 1 data= " + _data)
   console.log("fb_readOnPlayer1Move: this is player2")
-  flag = false;
+  var flag = false;
 
   var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2]
   var inputArray = ['w','l','d', 'c']
@@ -225,8 +225,8 @@ function drawFuncP2() {
 
 function clearFuncP2() {
   console.log("clear func p2")
-  fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'c');
-  ttt_resetGame()
+  ttt_resetGame(true)
+  ttt_lockUnclickedBTN()
 }
 
 /**************************************************************/
@@ -301,8 +301,8 @@ function drawFuncP1() {
 
 function clearFuncP1() {
   console.log("clear func p1")
-  fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'c');
-  ttt_resetGame()
+  ttt_resetGame(true)
+  ttt_lockUnclickedBTN()
 }
 
 /**************************************************************/

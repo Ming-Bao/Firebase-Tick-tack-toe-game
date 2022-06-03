@@ -43,7 +43,7 @@ var ttt_btnClicked = ["", "", "", "", "", "", "", "", ""];
 // disables the button that's hit
 /********************************************************/
 function ttt_btnHit(_btnID) {
-  var id = document.getElementById("tttBTN" + (_btnID+1));
+  var id = document.getElementById("tttBTN" + (_btnID));
 
   document.getElementById("btmText").innerHTML =
   ttt_player[ttt_playerTurn].userName + " Turn"
@@ -71,8 +71,8 @@ function fb_ttt_move(_btnID) {
 
   document.getElementById("btmText").innerHTML =
   ttt_player[ttt_playerTurn].userName + " Turn"
-  document.getElementById("tttBTN" + (_btnID+1)).disabled = true;
 
+  id.disabled = true
   ttt_determinXO(_btnID)
   ttt_determinWin();
 
@@ -106,18 +106,21 @@ function ttt_determinXO(_btnID) {
 /********************************************************/
 // resets all buttons and ttt_btnClicked array
 /********************************************************/
-function ttt_resetGame() {
+function ttt_resetGame(_readOnInput) {
   document.getElementById("btmText").innerHTML =
   ttt_player[ttt_playerTurn].userName + " Turn";
   document.getElementById("resetBTN").style.display="none";
+  console.log("ttt_resetGame: ttt_playerTurn: " + ttt_playerTurn)
 
-  if (ttt_playerTurn == 0) {
-    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'c');
+  if (_readOnInput != true) {
+    if (ttt_playerTurn == 0) {
+      fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'c');
+    }
+    if (ttt_playerTurn == 1) {
+      fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'c');
+    }
   }
-  if (ttt_playerTurn == 1) {
-    fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'c');
-  }
-  
+
   for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
     var id = document.getElementById("tttBTN" + (i + 1));
     id.disabled = false;
@@ -141,7 +144,8 @@ function ttt_determinWin() {
         ttt_btnClicked[WINCONDARR[1]] == ttt_player[ttt_playerTurn].symbol &&
         ttt_btnClicked[WINCONDARR[2]] == ttt_player[ttt_playerTurn].symbol) {
           
-          console.log("ttt_winNumbers: " + [WINCONDARR[0]] + [WINCONDARR[1]] + [WINCONDARR[2]] + ttt_player[ttt_playerTurn].symbol)
+          console.log("ttt_winNumbers: " + [WINCONDARR[0]] + [WINCONDARR[1]] + [WINCONDARR[2]])
+          console.log("ttt_winSymbols: " + ttt_btnClicked[WINCONDARR[0]] + ttt_btnClicked[WINCONDARR[1]] + ttt_btnClicked[WINCONDARR[2]])
           
           console.log((ttt_player[ttt_playerTurn].userName) + " win")
           document.getElementById("btmText").innerHTML =
