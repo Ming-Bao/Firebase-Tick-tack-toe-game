@@ -244,6 +244,9 @@ function fb_updatePlayerName(_readStatus, _data) {
   fb_activeLobby.player2.name = _data.player2.name
   document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
   document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name
+  ttt_player[0].userName = fb_activeLobby.player1.name
+  ttt_player[1].userName = fb_activeLobby.player2.name
+
 }
 
 /**************************************************************/

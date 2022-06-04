@@ -7,14 +7,14 @@ const p2Num = 1
 
 // all the details about the ttt game
 var ttt_player = [{
-  userName: "Ming X",
+  userName: "player 1",
   symbol: "x",
   win: 0,
   loss: 0,
   draw: 0
   },
             {
-  userName: "Steven O",
+  userName: "player 2",
   symbol: "O",  
   win: 0,
   loss: 0,
@@ -45,17 +45,17 @@ var ttt_btnClicked = ["", "", "", "", "", "", "", "", ""];
 function ttt_btnHit(_btnID) {
   var id = document.getElementById("tttBTN" + (_btnID));
 
-  document.getElementById("btmText").innerHTML =
-  ttt_player[ttt_playerTurn].userName + " Turn"
   id.disabled = true;
   ttt_determinXO(_btnID)
   ttt_determinWin();
   ttt_lockUnclickedBTN();
   if (ttt_playerTurn == 0) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", _btnID);
+    document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn+1].userName + " Turn"
   }
   if (ttt_playerTurn == 1) {
     fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", _btnID);
+    document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Turn"
   }
 }
 
