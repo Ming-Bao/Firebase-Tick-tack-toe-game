@@ -134,28 +134,6 @@ function fb_writeRec(_path, _key, _data) {
 }
 
 /**************************************************************/
-// fb_deleteRec(_path, _key)
-// Write a specific record & key to the DB
-// Input:  path to write to, the key, data to write
-// Return: 
-/**************************************************************/
-function fb_deleteRec(_path, _key) {
-  console.log('fb_deleteRec: path= ' + _path + '  key= ' + _key + 'data= ' + _data.name);
-
-  deleteStatus = "waiting";
-  firebase.database().ref(_path + '/' + _key).remove(
-    function (error) {
-      if (error) {
-        deleteStatus = "failure";
-        console.log(error);
-      } else {
-        deleteStatus = "OK";
-      }
-    });
-  console.log("fb_deleteRec: exit");
-}
-
-/**************************************************************/
 // fb_overWriteRec(_path, _key, _key2, _data)
 // Over writes a specific record & key to the DB
 // Input:  path to write to, the key, the second key, data to write
@@ -253,6 +231,19 @@ function fb_readRec(_path, _key, _data, _processFunc) {
     readStatus = "fail";
     console.log(error);
   }
+}
+
+/**************************************************************/
+// fb_updatePlayerName()
+// Stores database record in a function then updates both player's name
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_updatePlayerName(_readStatus, _data) {
+  fb_activeLobby.player1.name = _data.player1.name
+  fb_activeLobby.player2.name = _data.player2.name
+  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
+  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name
 }
 
 /**************************************************************/

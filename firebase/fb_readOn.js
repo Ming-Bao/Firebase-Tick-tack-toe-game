@@ -95,13 +95,24 @@ function fb_initActiveGame(_key) {
   fb_overWriteRec(PENDING_LOBBY, _key, "pendingStatus", true);
   fb_overWriteRec(PENDING_LOBBY, _key, "uid", playerDetails.uid);
   fb_activeLobby.player2.name = playerDetails.name
-  console.log(fb_activeLobby)
+  console.log("fb_activeLobby: " + fb_activeLobby)
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
+  fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "name", fb_readOnUpdatePlayerName);
   ui_pageSwap("s_pendingP", "s_gameP");
   ttt_playerTurn = 1
   ttt_lockUnclickedBTN()
   //this is player 2 so disable all the buttons so they they can't make a move
+}
+
+/**************************************************************/
+// fb_readOnUpdatePlayerName()
+// changes the player's name if 
+/**************************************************************/
+function fb_readOnUpdatePlayerName(_readStatus, _data) {
+  if (_data != "") {
+    fb_readRec(ACTIVE_LOBBY, playerDetails.uid, false, fb_updatePlayerName);
+  }
 }
 
 /**************************************************************/
@@ -165,7 +176,9 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2]
   var inputArray = ['w','l','d', 'c']
 
-  if (_data === ''){flag = true} 
+  if (_data === ''){
+    flag = true
+  console.log("player2 readon first move")} 
 
   for (var i = 0; i <= inputArray.length; i++){
     if(_data != ''){
@@ -316,9 +329,11 @@ function clearFuncP1() {
     fb_activeLobby.player2.uid = _data.uid;
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
     fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move)
+    fb_readRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid, false, fb_updatePlayerName);
     ttt_playerTurn = 0
     console.log(fb_pendingLobby.gameName)
     fb_deleteRec(PENDING_LOBBY, fb_pendingLobby.gameName);
+    //this is player 1
   }
 
 /**************************************************************/
