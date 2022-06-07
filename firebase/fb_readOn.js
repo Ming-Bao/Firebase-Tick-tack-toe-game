@@ -177,7 +177,7 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   var inputArray = ['w','l','d', 'c']
 
   if (_data === ''){
-    flag = true
+  flag = true
   console.log("player2 readon first move")} 
 
   for (var i = 0; i <= inputArray.length; i++){

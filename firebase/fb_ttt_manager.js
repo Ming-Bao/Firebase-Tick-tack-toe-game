@@ -74,7 +74,6 @@ function fb_ttt_move(_btnID) {
 
   id.disabled = true
   ttt_determinXO(_btnID)
-  ttt_determinWin();
 
   if (ttt_playerTurn == 0) {
     id.innerHTML = ttt_player[ttt_playerTurn + 1].symbol;
