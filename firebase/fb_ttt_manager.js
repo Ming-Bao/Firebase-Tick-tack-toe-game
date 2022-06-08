@@ -47,7 +47,6 @@ function ttt_btnHit(_btnID) {
 
   id.disabled = true;
   ttt_determinXO(_btnID)
-  ttt_determinWin();
   ttt_lockUnclickedBTN();
   if (ttt_playerTurn == 0) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", _btnID);
@@ -57,6 +56,7 @@ function ttt_btnHit(_btnID) {
     fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", _btnID);
     document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Turn"
   }
+  ttt_determinWin();
 }
 
 /********************************************************/
@@ -69,8 +69,7 @@ function fb_ttt_move(_btnID) {
 
   var id = document.getElementById("tttBTN" + _btnID);
 
-  document.getElementById("btmText").innerHTML =
-  ttt_player[ttt_playerTurn].userName + " Turn"
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn].userName + " Turn"
 
   id.disabled = true
   ttt_determinXO(_btnID)
@@ -204,6 +203,7 @@ function ttt_addWin(_playerNum) {
   ttt_player[_playerNum].win++
   document.getElementById("win" + _playerNum).innerHTML = 
   "wins: " + ttt_player[_playerNum].win
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn].userName + " Won"
 }
 
 /********************************************************/
@@ -233,6 +233,7 @@ function ttt_addDraw() {
     document.getElementById("draw" + "0").innerHTML = 
     "draws: " +  ttt_player[ttt_playerTurn - 1].draw
   }
+  document.getElementById("btmText").innerHTML = "You Draw!"
 }
 
 /********************************************************

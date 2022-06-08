@@ -183,7 +183,7 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   for (var i = 0; i <= inputArray.length; i++){
     if(_data != ''){
       if(_data == inputArray[i]){
-        console.log("fb_readOnPlayer1Move: player 2 fb_readOnPlayer1Move loop")
+        console.log("fb_readOnPlayer1Move: player 2 fb_readOnPlayer1Move loop");
         flag = true
         funcArray[i]()
       }
@@ -208,32 +208,32 @@ function winFuncP2() {
   // update score locally
   // update score on firebase
   // clear grid 
-  alert("player 1 has won")
   ttt_addWin(ttt_playerTurn - 1)
   ttt_addLoss(ttt_playerTurn)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Won"
 }
 
 function loseFuncP2() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 1 has lost")
   ttt_addLoss(ttt_playerTurn)
   ttt_addWin(ttt_playerTurn - 1)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Lost"
 }
 
 function drawFuncP2() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 1 has draw")
   ttt_addDraw()
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
+  document.getElementById("btmText").innerHTML = "You Draw!"
 }
 
 function clearFuncP2() {
@@ -260,6 +260,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
     if(flag == false){
       if(_data == inputArray[i]){
         console.log("player 1 fb_readOnPlayer2Move loop")
+        document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn].userName + " Turn"
         flag = true
         funcArray[i]()
       }
@@ -284,32 +285,32 @@ function winFuncP1() {
   // update score locally
   // update score on firebase
   // clear grid  
-  alert("player 2 has win")
   ttt_addWin(ttt_playerTurn + 1)
   ttt_addLoss(ttt_playerTurn)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn+1].userName + " Won"
 }
 
 function loseFuncP1() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 2 has lose")
   ttt_addLoss(ttt_playerTurn)
   ttt_addWin(ttt_playerTurn + 1)
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn+1].userName + " Lost"
 }
 
 function drawFuncP1() {
   // update score locally
   // update score on firebase
   // clear grid
-  alert("player 2 has draw")
   ttt_addDraw()
   document.getElementById("resetBTN").style.display="block";
   ttt_lockUnclickedBTN()
+  document.getElementById("btmText").innerHTML = "You Draw!"
 }
 
 function clearFuncP1() {
