@@ -234,12 +234,13 @@ function fb_readRec(_path, _key, _data, _processFunc) {
 }
 
 /**************************************************************/
-// fb_updatePlayerName()
-// Stores database record in a function then updates both player's name
+// fb_updatePlayer1NameAndScore()
+// Stores database record in an object then updates both player's name
+// and both player's score
 // Input: n/a
 // Return: n/a
 /**************************************************************/
-function fb_updatePlayerName(_readStatus, _data) {
+function fb_updatePlayer1NameAndScore(_readStatus, _data) {
   fb_activeLobby.player1.name = _data.player1.name
   fb_activeLobby.player2.name = _data.player2.name
   document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
@@ -247,6 +248,63 @@ function fb_updatePlayerName(_readStatus, _data) {
   ttt_player[0].userName = fb_activeLobby.player1.name
   ttt_player[1].userName = fb_activeLobby.player2.name
 
+  fb_score.onlinePlayer.wins = _data.player1.wins
+  fb_score.onlinePlayer.loss = _data.player1.loss
+  fb_score.onlinePlayer.draw = _data.player1.draw
+  
+
+  ttt_player[0].win = fb_score.onlinePlayer.wins
+  ttt_player[0].draw = fb_score.onlinePlayer.loss
+  ttt_player[0].loss = fb_score.onlinePlayer.draw
+
+  ttt_player[1].win = fb_score.localPlayer.wins
+  ttt_player[1].draw = fb_score.localPlayer.loss
+  ttt_player[1].loss = fb_score.localPlayer.draw
+
+  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win
+  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss
+  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw
+
+  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win
+  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss
+  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw
+}
+
+/**************************************************************/
+// fb_readOnUpdatePlayer2NameAndScore()
+// Stores database record in an object then updates both player's name
+// and both player's score
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_updatePlayer2NameAndScore(_readStatus, _data) {
+  fb_activeLobby.player1.name = _data.player1.name
+  fb_activeLobby.player2.name = _data.player2.name
+  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
+  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name
+  ttt_player[0].userName = fb_activeLobby.player1.name
+  ttt_player[1].userName = fb_activeLobby.player2.name
+
+  fb_score.onlinePlayer.wins = _data.player2.wins
+  fb_score.onlinePlayer.loss = _data.player2.loss
+  fb_score.onlinePlayer.draw = _data.player2.draw
+  
+
+  ttt_player[1].win = fb_score.onlinePlayer.wins
+  ttt_player[1].draw = fb_score.onlinePlayer.loss
+  ttt_player[1].loss = fb_score.onlinePlayer.draw
+
+  ttt_player[0].win = fb_score.localPlayer.wins
+  ttt_player[0].draw = fb_score.localPlayer.loss
+  ttt_player[0].loss = fb_score.localPlayer.draw
+
+  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win
+  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss
+  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw
+
+  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win
+  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss
+  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw
 }
 
 /**************************************************************/

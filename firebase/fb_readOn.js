@@ -38,11 +38,6 @@ var fb_score = {
   }
 }
 
-// two player back and forth info
-var fb_playerTurn = {
-
-}
-
 /**************************************************************/
 // fb_createPendingTable()
 // Call the functions and create the pending game lobby
@@ -98,7 +93,7 @@ function fb_initActiveGame(_key) {
   console.log("fb_activeLobby: " + fb_activeLobby)
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
-  fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "name", fb_readOnUpdatePlayerName);
+  fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "name", fb_readOnUpdatePlayer1NameAndScore);
   ui_pageSwap("s_pendingP", "s_gameP");
   ttt_playerTurn = 1
   ttt_lockUnclickedBTN()
@@ -106,12 +101,13 @@ function fb_initActiveGame(_key) {
 }
 
 /**************************************************************/
-// fb_readOnUpdatePlayerName()
-// changes the player's name if 
+// fb_readOnUpdatePlayer1NameAndScore()
+// reads the active lobby record and updates the score and name
+// in game
 /**************************************************************/
-function fb_readOnUpdatePlayerName(_readStatus, _data) {
+function fb_readOnUpdatePlayer1NameAndScore(_readStatus, _data) {
   if (_data != "") {
-    fb_readRec(ACTIVE_LOBBY, playerDetails.uid, false, fb_updatePlayerName);
+    fb_readRec(ACTIVE_LOBBY, playerDetails.uid, false, fb_updatePlayer1NameAndScore);
   }
 }
 
@@ -330,7 +326,7 @@ function clearFuncP1() {
     fb_activeLobby.player2.uid = _data.uid;
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1)
     fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move)
-    fb_readRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid, false, fb_updatePlayerName);
+    fb_readRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid, false, fb_updatePlayer2NameAndScore);
     ttt_playerTurn = 0
     console.log(fb_pendingLobby.gameName)
     fb_deleteRec(PENDING_LOBBY, fb_pendingLobby.gameName);
