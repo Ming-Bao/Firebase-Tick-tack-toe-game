@@ -61,7 +61,6 @@
       <h1>Welcome to Tic Tac Toe Game</h1>
       <h2>Hit Login To Continue</h2>
 			<button class="w3-button w3-red" onclick="fb_login(playerDetails)"> Login </button>
-      <button class="w3-button w3-red" onclick="ui_pageSwap('s_startP', 's_gameP')"> local game </button>
       <p id="s_loginStatus">  </p>
     </div>
   </center>
@@ -153,7 +152,6 @@
         </tr>
     </tbody>
 </table>
-  <button class="centerButton w3-container" onclick="ui_pageSwap('s_pendingP', 's_gameP')"> Local Game </button>
   <button class="centerButton w3-container" onclick="fb_createPendingTable()">  Reload Table </button>
   <button class="centerButton w3-container" onclick="ui_pageSwap('s_pendingP', 's_lobbyP')"> return to lobby </button>
 </div>
@@ -185,7 +183,7 @@
     <!-- header **********************************************-->
     <div class="center header">
       <h1> Tic Tac Toe Game </h1>
-      <button onclick="ui_pageSwap('s_gameP', 's_lobbyP')"> return to lobby </button>
+      <button onclick="fb_endGame()"> return to lobby </button>
     </div>
   
     <!-- 3x3 game grid ****************************************-->

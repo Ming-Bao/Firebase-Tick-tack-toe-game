@@ -151,11 +151,15 @@ function ttt_determinWin() {
           winFlag = true;
           ttt_addWin(ttt_playerTurn);
           if (ttt_playerTurn == 0) {
-            ttt_addLoss(ttt_playerTurn + 1)
+            ttt_addLoss(ttt_playerTurn + 1);
           }
           if (ttt_playerTurn == 1) {
-            ttt_addLoss(ttt_playerTurn - 1)
+            ttt_addLoss(ttt_playerTurn - 1);
           }
+
+          fb_score.localPlayer.wins = ttt_player[ttt_playerTurn].win;
+          fb_score.localPlayer.loss = ttt_player[ttt_playerTurn].loss;
+          fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
         }
       }
 
@@ -192,6 +196,8 @@ function ttt_determinWin() {
         fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", "d");
       }
       ttt_addDraw();
+      fb_score.localPlayer.draw = ttt_player[ttt_playerTurn].draw;
+      fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
     }
   }
 }

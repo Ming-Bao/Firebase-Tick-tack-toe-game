@@ -169,8 +169,8 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   console.log("fb_readOnPlayer1Move: this is player2")
   var flag = false;
 
-  var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2]
-  var inputArray = ['w','l','d', 'c']
+  var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2, endFuncP2]
+  var inputArray = ['w','l','d','c','e']
 
   if (_data === ''){
   flag = true
@@ -206,6 +206,9 @@ function winFuncP2() {
   // clear grid 
   ttt_addWin(ttt_playerTurn - 1)
   ttt_addLoss(ttt_playerTurn)
+  fb_score.localPlayer.wins = ttt_player[ttt_playerTurn].win;
+  fb_score.localPlayer.loss = ttt_player[ttt_playerTurn].loss;
+  fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
   document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Won"
@@ -230,12 +233,20 @@ function drawFuncP2() {
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
   document.getElementById("btmText").innerHTML = "You Draw!"
+  fb_score.localPlayer.draw = ttt_player[ttt_playerTurn].draw;
+  fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
 }
 
 function clearFuncP2() {
   console.log("clear func p2")
   ttt_resetGame(true)
   ttt_lockUnclickedBTN()
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn-1].userName + " Turn"
+}
+
+function endFuncP2() {
+  ui_pageSwap('s_gameP', 's_lobbyP');
+
 }
 
 /**************************************************************/
@@ -248,8 +259,8 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   console.log("this is player 1")
   var flag = false
 
-  var funcArray = [winFuncP1, loseFuncP1, drawFuncP1, clearFuncP1]
-  var inputArray = ['w','l','d','c']
+  var funcArray = [winFuncP1, loseFuncP1, drawFuncP1, clearFuncP1, endFuncP1]
+  var inputArray = ['w','l','d','c','e']
 
   if (_data == ''){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
@@ -283,6 +294,9 @@ function winFuncP1() {
   // clear grid  
   ttt_addWin(ttt_playerTurn + 1)
   ttt_addLoss(ttt_playerTurn)
+  fb_score.localPlayer.wins = ttt_player[ttt_playerTurn].win;
+  fb_score.localPlayer.loss = ttt_player[ttt_playerTurn].loss;
+  fb_writeRec(SCORE, playerDetails.uid, fb_score.localPlayer);
   ttt_lockUnclickedBTN()
   document.getElementById("resetBTN").style.display="block";
   document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn+1].userName + " Won"
@@ -313,6 +327,12 @@ function clearFuncP1() {
   console.log("clear func p1")
   ttt_resetGame(true)
   ttt_lockUnclickedBTN()
+  document.getElementById("btmText").innerHTML = ttt_player[ttt_playerTurn+1].userName + " Turn"
+}
+
+function endFuncP1() {
+  ui_pageSwap('s_gameP', 's_lobbyP');
+
 }
 
 /**************************************************************/
@@ -333,6 +353,94 @@ function clearFuncP1() {
     //this is player 1
   }
 
+/**************************************************************/
+// fb_updatePlayer1NameAndScore()
+// Stores database record in an object then updates both player's name
+// and both player's score
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_updatePlayer1NameAndScore(_readStatus, _data) {
+  fb_activeLobby.player1.name = _data.player1.name
+  fb_activeLobby.player2.name = _data.player2.name
+  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
+  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name
+  ttt_player[0].userName = fb_activeLobby.player1.name
+  ttt_player[1].userName = fb_activeLobby.player2.name
+
+  fb_score.onlinePlayer.wins = _data.player1.wins
+  fb_score.onlinePlayer.loss = _data.player1.loss
+  fb_score.onlinePlayer.draw = _data.player1.draw
+  
+
+  ttt_player[0].win = fb_score.onlinePlayer.wins
+  ttt_player[0].draw = fb_score.onlinePlayer.draw
+  ttt_player[0].loss = fb_score.onlinePlayer.loss
+
+  ttt_player[1].win = fb_score.localPlayer.wins
+  ttt_player[1].draw = fb_score.localPlayer.draw
+  ttt_player[1].loss = fb_score.localPlayer.loss
+
+  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win
+  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss
+  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw
+
+  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win
+  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss
+  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw
+}
+
+/**************************************************************/
+// fb_readOnUpdatePlayer2NameAndScore()
+// Stores database record in an object then updates both player's name
+// and both player's score
+// Input: n/a
+// Return: n/a
+/**************************************************************/
+function fb_updatePlayer2NameAndScore(_readStatus, _data) {
+  fb_activeLobby.player1.name = _data.player1.name
+  fb_activeLobby.player2.name = _data.player2.name
+  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name
+  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name
+  ttt_player[0].userName = fb_activeLobby.player1.name
+  ttt_player[1].userName = fb_activeLobby.player2.name
+
+  fb_score.onlinePlayer.wins = _data.player2.wins
+  fb_score.onlinePlayer.loss = _data.player2.loss
+  fb_score.onlinePlayer.draw = _data.player2.draw
+  
+
+  ttt_player[1].win = fb_score.onlinePlayer.wins
+  ttt_player[1].draw = fb_score.onlinePlayer.draw
+  ttt_player[1].loss = fb_score.onlinePlayer.loss
+
+  ttt_player[0].win = fb_score.localPlayer.wins
+  ttt_player[0].draw = fb_score.localPlayer.draw
+  ttt_player[0].loss = fb_score.localPlayer.loss
+
+  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win
+  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss
+  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw
+
+  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win
+  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss
+  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw
+}
+
+/**************************************************************/
+// fb_endGame()
+// writes e to firebase and change the page to the lobby page
+/**************************************************************/
+function fb_endGame() {
+  ui_pageSwap('s_gameP', 's_lobbyP');
+
+  if (ttt_playerTurn == 0) {
+    fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'e');
+  }
+  if (ttt_playerTurn == 1) {
+    fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'e');
+  }
+}
 /**************************************************************/
 // END OF MODULE
 /**************************************************************/
