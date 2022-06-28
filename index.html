@@ -130,7 +130,7 @@
   <h1> Game Lobby </h1>
   <button onclick="fb_createPendingLobby()" id=""> Create Game </button>
   <button onclick="fb_createPendingTable()" id=""> Join Game </button>
-  <button id="s_adminBTN" class="w3-button w3-blue" onclick="ui_pageSwap('s_startP', 's_adminP')"> Admin Page </button>
+  <button id="s_adminBTN" class="w3-button w3-blue" onclick="ui_pageSwap('s_lobbyP', 's_adminP')"> Admin Page </button>
 </div>
 
 <!--*************************************************************
@@ -255,7 +255,7 @@
       </button>
       <button id="b_adBB" class="w3-button w3-block w3-col m3 
                                  w3-medium w3-ripple w3-small w3-border" 
-              onclick="ad_BB()" value="Submit">Score
+              onclick="ad_score()" value="Submit">Score
       </button>
     </nav>
       
