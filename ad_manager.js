@@ -46,28 +46,233 @@ function ad_admin() {
   
     document.getElementById("b_adUser").style.backgroundColor = "cyan"
     document.getElementById("b_adHome").style.backgroundColor = "grey"
-    document.getElementById("b_adBB").style.backgroundColor   = "grey"
+    document.getElementById("b_adScore").style.backgroundColor   = "grey"
+    document.getElementById("b_adPending").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP1").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP2").style.backgroundColor = "grey";
     // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT       
     fb_readAll(PLAYER_DETAILS, ad_processUSERReadAll);                 
   }
   
   /**************************************************************/
-  // ad_BB()
+  // ad_score()
   // Input event; called when admin BB button clicked
   // Display BB screen
   // Input:   
   // Return:
   /**************************************************************/
-  function ad_BB() {
-    console.log('ad_BB: ');
+  function ad_score() {
+    console.log('ad_score: ');
     
-    document.getElementById("b_adBB").style.backgroundColor   = "cyan"
+    document.getElementById("b_adScore").style.backgroundColor   = "cyan"
     document.getElementById("b_adUser").style.backgroundColor = "grey"
     document.getElementById("b_adHome").style.backgroundColor = "grey";
+    document.getElementById("b_adPending").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP1").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP2").style.backgroundColor = "grey";
     // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT       
-    fb_readAll(SCORE, ad_processBBReadAll);                            
+    fb_readAll(SCORE, ad_processScoreReadAll);                            
+  }
+
+  /**************************************************************/
+  // ad_pending()
+  // Input event; called when admin BB button clicked
+  // Display BB screen
+  // Input:   
+  // Return:
+  /**************************************************************/
+  function ad_pending() {
+    console.log('ad_pending: ');
+    
+    document.getElementById("b_adScore").style.backgroundColor   = "grey"
+    document.getElementById("b_adUser").style.backgroundColor = "grey"
+    document.getElementById("b_adHome").style.backgroundColor = "grey";
+    document.getElementById("b_adPending").style.backgroundColor = "cyan";
+    document.getElementById("b_adActiveP1").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP2").style.backgroundColor = "grey";
+    // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT       
+    fb_readAll(PENDING_LOBBY, ad_processPendingReadAll);                            
+  }
+
+  /**************************************************************/
+  // ad_activeP1()
+  // Input event; called when admin BB button clicked
+  // Display BB screen
+  // Input:   
+  // Return:
+  /**************************************************************/
+  function ad_activeP1() {
+    console.log('ad_active: ');
+    
+    document.getElementById("b_adScore").style.backgroundColor   = "gray"
+    document.getElementById("b_adUser").style.backgroundColor = "grey"
+    document.getElementById("b_adHome").style.backgroundColor = "grey";
+    document.getElementById("b_adPending").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP1").style.backgroundColor = "cyan";
+    document.getElementById("b_adActiveP2").style.backgroundColor = "grey";
+    // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT       
+    fb_readAll(ACTIVE_LOBBY, ad_processActiveP1ReadAll);                            
+  }
+
+  /**************************************************************/
+  // ad_activeP2()
+  // Input event; called when admin BB button clicked
+  // Display BB screen
+  // Input:   
+  // Return:
+  /**************************************************************/
+  function ad_activeP2() {
+    console.log('ad_active: ');
+    
+    document.getElementById("b_adScore").style.backgroundColor   = "gray"
+    document.getElementById("b_adUser").style.backgroundColor = "grey"
+    document.getElementById("b_adHome").style.backgroundColor = "grey";
+    document.getElementById("b_adPending").style.backgroundColor = "grey";
+    document.getElementById("b_adActiveP2").style.backgroundColor = "cyan";
+    document.getElementById("b_adActiveP1").style.backgroundColor = "grey";
+    // ENSURE THE READ FUNCTION NAME & THE PATH NAME ARE CORRECT       
+    fb_readAll(ACTIVE_LOBBY, ad_processActiveP2ReadAll);                            
+  }
+
+  /**************************************************************/
+  // ad_processActiveP2ReadAll(_result, _dbRec)
+  // Called by db_readAll to handle result of read ALL USER records request.
+  // Save data & update display with record info
+  // Input:  read status, data record just read 
+  // Return:
+  /**************************************************************/
+  function ad_processActiveP2ReadAll(_result, _dbRec) {
+    console.log('ad_processActiveReadAll: ', 'result = ' + _result);
+    
+    var childKey;
+    var childDataKey;
+    var childDataP2;
+    var ad_adminArray = [];
+  
+    if (_result == 'OK') {
+      _dbRec.forEach(function(childSnapshot) {
+        childKey = childSnapshot.key;
+        childDataKey = childSnapshot.val();
+        childDataP2 = childDataKey.player2
+        console.table(childDataP2);
+        // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS           
+        // MATCH YOUR FIREBASE RECORDS FOR THE PATH                       
+        // NOTE: IF YOU USE THE SUPPLIED reg_manager.js mudule, THEN      
+        // YOU CAN LEAVE ALL THESE FILEDS AS THEY ARE AS THE REGISTRATION 
+        // PROCESS CREATES ALL OF THE FILEDS.                             
+        ad_adminArray.push({
+          uid:         childKey,
+          name:        childDataP2.name,
+          draw:        childDataP2.draw,
+          wins:        childDataP2.wins,
+          loss:        childDataP2.loss,
+          move:        childDataP2.move
+        });
+      });
+  
+      // build & display user data
+      // MAKE SURE THE FOLOWING PARAMETERS ARE CORRECT. PARAMETER:   
+      //  4 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  5 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  6 = HTML ID OF DIV TO SHOW OR LEAVE EMPTY                  
+      //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.        
+      //  8 = DATABASE PATH THE RECORDS WERE READ FROM.              
+      ad_displayAll("t_userData", ad_adminArray, true,               
+        "", "", "", 1, ACTIVE_LOBBY);      
+    }
+  }
+
+  /**************************************************************/
+  // ad_processActiveP1ReadAll(_result, _dbRec)
+  // Called by db_readAll to handle result of read ALL USER records request.
+  // Save data & update display with record info
+  // Input:  read status, data record just read 
+  // Return:
+  /**************************************************************/
+  function ad_processActiveP1ReadAll(_result, _dbRec) {
+    console.log('ad_processActiveReadAll: ', 'result = ' + _result);
+    
+    var childKey;
+    var childDataKey;
+    var childDataP1;
+    var ad_adminArray = [];
+  
+    if (_result == 'OK') {
+      _dbRec.forEach(function(childSnapshot) {
+        childKey = childSnapshot.key;
+        childDataKey = childSnapshot.val();
+        childDataP1 = childDataKey.player1
+        console.table(childDataP1);
+        // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS           
+        // MATCH YOUR FIREBASE RECORDS FOR THE PATH                       
+        // NOTE: IF YOU USE THE SUPPLIED reg_manager.js mudule, THEN      
+        // YOU CAN LEAVE ALL THESE FILEDS AS THEY ARE AS THE REGISTRATION 
+        // PROCESS CREATES ALL OF THE FILEDS.                             
+        ad_adminArray.push({
+          uid:         childKey,
+          name:        childDataP1.name,
+          draw:        childDataP1.draw,
+          wins:        childDataP1.wins,
+          loss:        childDataP1.loss,
+          move:        childDataP1.move
+        });
+      });
+  
+      // build & display user data
+      // MAKE SURE THE FOLOWING PARAMETERS ARE CORRECT. PARAMETER:   
+      //  4 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  5 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  6 = HTML ID OF DIV TO SHOW OR LEAVE EMPTY                  
+      //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.        
+      //  8 = DATABASE PATH THE RECORDS WERE READ FROM.              
+      ad_displayAll("t_userData", ad_adminArray, true,               
+        "", "", "", 1, ACTIVE_LOBBY);      
+    }
   }
   
+  /**************************************************************/
+  // ad_processPendingReadAll(_result, _dbRec)
+  // Called by db_readAll to handle result of read ALL USER records request.
+  // Save data & update display with record info
+  // Input:  read status, data record just read 
+  // Return:
+  /**************************************************************/
+  function ad_processPendingReadAll(_result, _dbRec) {
+    console.log('ad_processPendingReadAll: ', 'result = ' + _result);
+    
+    var childKey;
+    var childData;
+    var ad_adminArray = [];
+  
+    if (_result == 'OK') {
+      _dbRec.forEach(function(childSnapshot) {
+        childKey = childSnapshot.key;
+        childData = childSnapshot.val();
+        console.table(childData);
+        // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS           
+        // MATCH YOUR FIREBASE RECORDS FOR THE PATH                       
+        // NOTE: IF YOU USE THE SUPPLIED reg_manager.js mudule, THEN      
+        // YOU CAN LEAVE ALL THESE FILEDS AS THEY ARE AS THE REGISTRATION 
+        // PROCESS CREATES ALL OF THE FILEDS.                             
+        ad_adminArray.push({
+          gameName:             childData.gameName,
+          pendingStatus:        childData.pendingStatus,
+          timeStamp:            childData.timeStamp
+        });
+      });
+  
+      // build & display user data
+      // MAKE SURE THE FOLOWING PARAMETERS ARE CORRECT. PARAMETER:   
+      //  4 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  5 = HTML ID OF DIV TO HIDE OR LEAVE EMPTY                  
+      //  6 = HTML ID OF DIV TO SHOW OR LEAVE EMPTY                  
+      //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.        
+      //  8 = DATABASE PATH THE RECORDS WERE READ FROM.              
+      ad_displayAll("t_userData", ad_adminArray, true,               
+        "", "", "", 1, PENDING_LOBBY);      
+    }
+  }
+
   /**************************************************************/
   // ad_processUSERReadAll(_result, _dbRec)
   // Called by db_readAll to handle result of read ALL USER records request.
@@ -94,7 +299,7 @@ function ad_admin() {
         // PROCESS CREATES ALL OF THE FILEDS.                             
         ad_adminArray.push({
           name:         childData.name,
-            email:        childData.email,
+          email:        childData.email,
           // Left photoURL out as its so long the table will be too wide for the screen
           //photoURL:   playerDetails.photoURL,  
           phone:        childData.phone,
@@ -121,14 +326,14 @@ function ad_admin() {
   }
   
   /**************************************************************/
-  // ad_processBBReadAll(_result, _dbRec)
+  // ad_processScoreReadAll(_result, _dbRec)
   // Called by db_readAll to handle result of read ALL BB records request.
   // Save data & update display with record info
   // Input:  read status, data record just read
   // Return:
   /**************************************************************/
-  function ad_processBBReadAll(_result, _dbRec) {
-    console.log('ad_processBBReadAll: ', 'result = ' + _result);
+  function ad_processScoreReadAll(_result, _dbRec) {
+    console.log('ad_processScoreReadAll: ', 'result = ' + _result);
   
     var childKey;
     var childData;
@@ -144,10 +349,9 @@ function ad_admin() {
         //  MATCH YOUR FIREBASE RECORDS FOR THE PATH                  
         ad_adminArray.push({     
           uid:  childKey,
-          hit: childData.hit,
-          highScore: childData.highScore,
-          miss: childData.miss,
-          score: childData.score
+          loss: childData.loss,
+          wins: childData.wins,
+          draw: childData.draw,
         });
       });
   
@@ -177,7 +381,7 @@ function ad_admin() {
     //   AND THE DATATYPE IS CORRECTLY SET                            
     var vd_dataTypes = {            
       name:         'a',
-        email:        'b',
+      email:        'b',
       // Left photoURL out - its so long the table will be too wide for screen
       //photoURL:   'b', 
       phone:        'n',
@@ -279,7 +483,7 @@ function ad_admin() {
   
   /**************************************************************/
   // ad_genTableHead(_tableInfo, _fieldNames, _action)
-  // Called by ad_BB
+  // Called by ad_score
   // Create table header
   // Input:  table & object array of data 
   //         if _action = true, then add action column
@@ -310,7 +514,7 @@ function ad_admin() {
   
   /**************************************************************/
   // ad_genTableEntry(_tableInfo, _array, _action, _tableId, _item, _path)
-  // Called by ad_BB
+  // Called by ad_score
   // Create table entries
   // Input:  table & object array of data
   //         if _action = true, then add DELETE button
