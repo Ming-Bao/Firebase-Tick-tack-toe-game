@@ -2,6 +2,7 @@
 // Swaps Page
 /**************************************************************/
 function ui_pageSwap(_hide, _show) {
+  console.log("hide: " + _hide + "show: " + _show);
   document.getElementById(_hide).style.display="none";
   document.getElementById(_show).style.display="block";
 }

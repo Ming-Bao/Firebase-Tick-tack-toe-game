@@ -192,6 +192,7 @@ function fb_readAll(_path, _processData) {
   function gotRecord(snapshot) {
     if (snapshot.val() == null) {
       readStatus = "no record";
+      console.log(readStatus);
     } else {
       readStatus = "OK";
       _processData("OK", snapshot)

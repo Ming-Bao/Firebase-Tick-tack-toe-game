@@ -13,16 +13,14 @@ var fb_activeLobby = {
     loss: 0,
     draw: 0,
     name: "",
-    move: "",
-    uid: ""
+    move: ""
   },
   player2:{
     wins: 0,
     loss: 0,
     draw: 0,
     name: "",
-    move: "",
-    uid: ""
+    move: ""
   }
 }
 
@@ -92,7 +90,6 @@ function fb_initActiveGame(_key) {
   fb_overWriteRec(PENDING_LOBBY, _key, "uid", playerDetails.uid);
   fb_activeLobby.player2.name = playerDetails.name;
   console.log("fb_activeLobby: " + fb_activeLobby);
-  fb_activeLobby.player2.uid = playerDetails.uid;
   fb_writeRec(ACTIVE_LOBBY, playerDetails.uid, fb_activeLobby);
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "move", fb_readOnPlayer1Move);
   fb_readOnRec(ACTIVE_LOBBY, playerDetails.uid + "/" + "player1" + "/" + "name", fb_readOnUpdatePlayer1NameAndScore);
@@ -174,7 +171,7 @@ function fb_readOnPlayer1Move(_readStatus, _data) {
   var funcArray = [winFuncP2, loseFuncP2, drawFuncP2, clearFuncP2, endFuncP2];
   var inputArray = ['w','l','d','c','e'];
 
-  if (_data === ''){
+  if (_data === '' || _data == null){
   flag = true
   console.log("player2 readon first move")} 
 
@@ -248,6 +245,7 @@ function clearFuncP2() {
 
 function endFuncP2() {
   ui_pageSwap('s_gameP', 's_lobbyP');
+  fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
 }
 
 /**************************************************************/
@@ -263,7 +261,7 @@ function fb_readOnPlayer2Move(_readStatus, _data) {
   var funcArray = [winFuncP1, loseFuncP1, drawFuncP1, clearFuncP1, endFuncP1];
   var inputArray = ['w','l','d','c','e'];
 
-  if (_data == ''){flag = true}
+  if (_data === '' || _data == null){flag = true}
   for (var i = 0; i <= inputArray.length; i++){
     if(flag == false){
       if(_data == inputArray[i]){
@@ -333,6 +331,7 @@ function clearFuncP1() {
 
 function endFuncP1() {
   ui_pageSwap('s_gameP', 's_lobbyP');
+  fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
 
 }
 
@@ -345,7 +344,6 @@ function endFuncP1() {
   function fb_processP2UID (_status, _data) {
     console.log("fb_processP2UID");
     fb_activeLobby.player2.uid = _data.uid;
-    fb_activeLobby.player1.uid = playerDetails.uid;
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player1", fb_activeLobby.player1);
     fb_readOnRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/" + "player2" + "/" + "move", fb_readOnPlayer2Move);
     fb_readRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid, false, fb_updatePlayer2NameAndScore);
@@ -438,11 +436,11 @@ function fb_endGame() {
 
   if (ttt_playerTurn == 0) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'e');
-    fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
+    //fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
   }
   if (ttt_playerTurn == 1) {
     fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'e');
-    fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
+    //fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
   }
 }
 /**************************************************************/

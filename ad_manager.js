@@ -142,7 +142,7 @@ function ad_admin() {
   // Return:
   /**************************************************************/
   function ad_processActiveP2ReadAll(_result, _dbRec) {
-    console.log('ad_processActiveReadAll: ', 'result = ' + _result);
+    console.log('ad_processActiveP2ReadAll: ', 'result = ' + _result);
     
     var childKey;
     var childDataKey;
@@ -190,7 +190,7 @@ function ad_admin() {
   // Return:
   /**************************************************************/
   function ad_processActiveP1ReadAll(_result, _dbRec) {
-    console.log('ad_processActiveReadAll: ', 'result = ' + _result);
+    console.log('ad_processActiveP1ReadAll: ', 'result = ' + _result);
     
     var childKey;
     var childDataKey;
