@@ -29,7 +29,7 @@ function ad_admin() {
   
     // Display the game screen
     // ENSURE THE HTML ID ARE CORRECT                                 
-    s_gameP.style.display    = "block";                               
+    s_lobbyP.style.display    = "block";                               
     s_adminP.style.display   = "none";                                
     s_startP.style.display   = "none";                                
   }

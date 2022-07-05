@@ -126,7 +126,7 @@ function fb_readOnRec(_path, _key, _processFunc) {
       let dbData = snapshot.val();
       if (dbData == null) {
         readStatus = "no record";
-        _processFunc(readStatus);
+        //_processFunc(readStatus);
       } else {
         readStatus = "OK";
         _processFunc(readStatus, dbData);
@@ -246,6 +246,15 @@ function clearFuncP2() {
 function endFuncP2() {
   ui_pageSwap('s_gameP', 's_lobbyP');
   fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
+  ttt_playerTurn = ""
+  ttt_unlockUnclickedBTN()
+  for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
+    var id = document.getElementById("tttBTN" + (i + 1));
+    id.disabled = false;
+    id.innerHTML = ""
+    id.style.backgroundColor = "lightgray"
+    ttt_btnClicked[i] = "";
+  }
 }
 
 /**************************************************************/
@@ -332,7 +341,15 @@ function clearFuncP1() {
 function endFuncP1() {
   ui_pageSwap('s_gameP', 's_lobbyP');
   fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
-
+  ttt_playerTurn = ""
+  ttt_unlockUnclickedBTN()
+  for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
+    var id = document.getElementById("tttBTN" + (i + 1));
+    id.disabled = false;
+    id.innerHTML = ""
+    id.style.backgroundColor = "lightgray"
+    ttt_btnClicked[i] = "";
+  }
 }
 
 /**************************************************************/
@@ -361,33 +378,35 @@ function endFuncP1() {
 // Return: n/a
 /**************************************************************/
 function fb_updatePlayer1NameAndScore(_readStatus, _data) {
-  fb_activeLobby.player1.name = _data.player1.name;
-  fb_activeLobby.player2.name = _data.player2.name;
-  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name;
-  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name;
-  ttt_player[0].userName = fb_activeLobby.player1.name;
-  ttt_player[1].userName = fb_activeLobby.player2.name;
+  if (_readStatus == "OK") {
+    fb_activeLobby.player1.name = _data.player1.name;
+    fb_activeLobby.player2.name = _data.player2.name;
+    document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name;
+    document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name;
+    ttt_player[0].userName = fb_activeLobby.player1.name;
+    ttt_player[1].userName = fb_activeLobby.player2.name;
 
-  fb_score.onlinePlayer.wins = _data.player1.wins;
-  fb_score.onlinePlayer.loss = _data.player1.loss;
-  fb_score.onlinePlayer.draw = _data.player1.draw;
-  
+    fb_score.onlinePlayer.wins = _data.player1.wins;
+    fb_score.onlinePlayer.loss = _data.player1.loss;
+    fb_score.onlinePlayer.draw = _data.player1.draw;
+    
 
-  ttt_player[0].win = fb_score.onlinePlayer.wins;
-  ttt_player[0].draw = fb_score.onlinePlayer.draw;
-  ttt_player[0].loss = fb_score.onlinePlayer.loss;
+    ttt_player[0].win = fb_score.onlinePlayer.wins;
+    ttt_player[0].draw = fb_score.onlinePlayer.draw;
+    ttt_player[0].loss = fb_score.onlinePlayer.loss;
 
-  ttt_player[1].win = fb_score.localPlayer.wins;
-  ttt_player[1].draw = fb_score.localPlayer.draw;
-  ttt_player[1].loss = fb_score.localPlayer.loss;
+    ttt_player[1].win = fb_score.localPlayer.wins;
+    ttt_player[1].draw = fb_score.localPlayer.draw;
+    ttt_player[1].loss = fb_score.localPlayer.loss;
 
-  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win;
-  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss;
-  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw;
+    document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win;
+    document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss;
+    document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw;
 
-  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
-  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
-  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+    document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
+    document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
+    document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+  }
 }
 
 /**************************************************************/
@@ -398,33 +417,35 @@ function fb_updatePlayer1NameAndScore(_readStatus, _data) {
 // Return: n/a
 /**************************************************************/
 function fb_updatePlayer2NameAndScore(_readStatus, _data) {
-  fb_activeLobby.player1.name = _data.player1.name;
-  fb_activeLobby.player2.name = _data.player2.name;
-  document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name;
-  document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name;
-  ttt_player[0].userName = fb_activeLobby.player1.name;
-  ttt_player[1].userName = fb_activeLobby.player2.name;
+  if (_readStatus == "OK") {
+    fb_activeLobby.player1.name = _data.player1.name;
+    fb_activeLobby.player2.name = _data.player2.name;
+    document.getElementById("p1Name").innerHTML = fb_activeLobby.player1.name;
+    document.getElementById("p2Name").innerHTML = fb_activeLobby.player2.name;
+    ttt_player[0].userName = fb_activeLobby.player1.name;
+    ttt_player[1].userName = fb_activeLobby.player2.name;
 
-  fb_score.onlinePlayer.wins = _data.player2.wins;
-  fb_score.onlinePlayer.loss = _data.player2.loss;
-  fb_score.onlinePlayer.draw = _data.player2.draw;
-  
+    fb_score.onlinePlayer.wins = _data.player2.wins;
+    fb_score.onlinePlayer.loss = _data.player2.loss;
+    fb_score.onlinePlayer.draw = _data.player2.draw;
+    
 
-  ttt_player[1].win = fb_score.onlinePlayer.wins;
-  ttt_player[1].draw = fb_score.onlinePlayer.draw;
-  ttt_player[1].loss = fb_score.onlinePlayer.loss;
+    ttt_player[1].win = fb_score.onlinePlayer.wins;
+    ttt_player[1].draw = fb_score.onlinePlayer.draw;
+    ttt_player[1].loss = fb_score.onlinePlayer.loss;
 
-  ttt_player[0].win = fb_score.localPlayer.wins;
-  ttt_player[0].draw = fb_score.localPlayer.draw;
-  ttt_player[0].loss = fb_score.localPlayer.loss;
+    ttt_player[0].win = fb_score.localPlayer.wins;
+    ttt_player[0].draw = fb_score.localPlayer.draw;
+    ttt_player[0].loss = fb_score.localPlayer.loss;
 
-  document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win;
-  document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss;
-  document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw;
+    document.getElementById("win0").innerHTML = "Wins: " + ttt_player[0].win;
+    document.getElementById("loss0").innerHTML = "Loss: " + ttt_player[0].loss;
+    document.getElementById("draw0").innerHTML = "Draw: " + ttt_player[0].draw;
 
-  document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
-  document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
-  document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+    document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
+    document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
+    document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+  }
 }
 
 /**************************************************************/
@@ -432,16 +453,25 @@ function fb_updatePlayer2NameAndScore(_readStatus, _data) {
 // writes e to firebase and change the page to the lobby page
 /**************************************************************/
 function fb_endGame() {
+  console.log("fb_endGame");
+
   ui_pageSwap('s_gameP', 's_lobbyP');
+  ttt_unlockUnclickedBTN;
+  for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
+    var id = document.getElementById("tttBTN" + (i + 1));
+    id.disabled = false;
+    id.innerHTML = ""
+    id.style.backgroundColor = "lightgray"
+    ttt_btnClicked[i] = "";
+  }
 
   if (ttt_playerTurn == 0) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'e');
-    //fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
   }
   if (ttt_playerTurn == 1) {
     fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'e');
-    //fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
   }
+  ttt_playerTurn = "";
 }
 /**************************************************************/
 // END OF MODULE
