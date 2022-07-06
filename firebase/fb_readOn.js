@@ -117,27 +117,27 @@ function fb_readOnUpdatePlayer1NameAndScore(_readStatus, _data) {
 // Return:  
 /**************************************************************/
 function fb_readOnRec(_path, _key, _processFunc) {
-    console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
-  
-    readStatus = "waiting";
-    firebase.database().ref(_path + '/' + _key).on("value", gotRecord, readErr);
-  
-    function gotRecord(snapshot) {
-      let dbData = snapshot.val();
-      if (dbData == null) {
-        readStatus = "no record";
-        //_processFunc(readStatus);
-      } else {
-        readStatus = "OK";
-        _processFunc(readStatus, dbData);
-      }
-    }
-  
-    function readErr(error) {
-      readStatus = "fail";
-      console.log(error);
+  console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
+
+  readStatus = "waiting";
+  firebase.database().ref(_path + '/' + _key).on("value", gotRecord, readErr);
+
+  function gotRecord(snapshot) {
+    let dbData = snapshot.val();
+    if (dbData == null) {
+      readStatus = "no record";
+      //_processFunc(readStatus);
+    } else {
+      readStatus = "OK";
+      _processFunc(readStatus, dbData);
     }
   }
+
+  function readErr(error) {
+    readStatus = "fail";
+    console.log(error);
+  }
+}
 
 /**************************************************************/
 // fb_readOnPendingStatus(_readStatus, _data)
@@ -247,7 +247,8 @@ function endFuncP2() {
   ui_pageSwap('s_gameP', 's_lobbyP');
   fb_deleteRec(ACTIVE_LOBBY, playerDetails.uid);
   ttt_playerTurn = ""
-  ttt_unlockUnclickedBTN()
+  ttt_unlockUnclickedBTN();
+  fb_activeLobby.player2.uid = "";
   for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
     var id = document.getElementById("tttBTN" + (i + 1));
     id.disabled = false;
@@ -341,8 +342,10 @@ function clearFuncP1() {
 function endFuncP1() {
   ui_pageSwap('s_gameP', 's_lobbyP');
   fb_deleteRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid);
+  fb_activeLobby
   ttt_playerTurn = ""
   ttt_unlockUnclickedBTN()
+  fb_activeLobby.player2.uid = "";
   for (var i = 0; i <= ttt_ALLWINCOND.length; i++) {
     var id = document.getElementById("tttBTN" + (i + 1));
     id.disabled = false;
@@ -467,11 +470,14 @@ function fb_endGame() {
 
   if (ttt_playerTurn == 0) {
     fb_writeRec(ACTIVE_LOBBY, fb_activeLobby.player2.uid + "/player1/move", 'e');
+    firebase.database().ref(ACTIVE_LOBBY + '/' + fb_activeLobby.player2.uid).off
   }
   if (ttt_playerTurn == 1) {
     fb_writeRec(ACTIVE_LOBBY, playerDetails.uid + "/player2/move", 'e');
+    firebase.database().ref(ACTIVE_LOBBY + '/' + playerDetails.uid).off
   }
   ttt_playerTurn = "";
+  fb_activeLobby.player2.uid = "";
 }
 /**************************************************************/
 // END OF MODULE

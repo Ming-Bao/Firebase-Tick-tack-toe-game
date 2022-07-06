@@ -74,13 +74,16 @@ function fb_ttt_move(_btnID) {
   id.disabled = true
   ttt_determinXO(_btnID)
 
+  console.log("playerTurn: " + ttt_playerTurn);
   if (ttt_playerTurn == 0) {
+    console.log("player 2 symbol" + ttt_player[ttt_playerTurn + 1].symbol)
     id.innerHTML = ttt_player[ttt_playerTurn + 1].symbol;
     ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn + 1].symbol;
     id.style.fontSize = "300%";
     id.style.backgroundColor = "aqua"
   }
   if (ttt_playerTurn == 1) {
+    console.log("player 1 symbol" + ttt_player[ttt_playerTurn - 1].symbol)
     id.innerHTML = ttt_player[ttt_playerTurn - 1].symbol;
     ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn - 1].symbol;
     id.style.fontSize = "300%";
@@ -94,6 +97,9 @@ function fb_ttt_move(_btnID) {
 /********************************************************/
 function ttt_determinXO(_btnID) {
   var id = document.getElementById("tttBTN" + _btnID);
+
+  console.log("ttt_playerTurn: " + ttt_playerTurn);
+  console.log("Player Symbol: " + ttt_player[ttt_playerTurn].symbol)
 
   id.innerHTML = ttt_player[ttt_playerTurn].symbol;
   ttt_btnClicked[_btnID - 1] = ttt_player[ttt_playerTurn].symbol;
