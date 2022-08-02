@@ -28,7 +28,7 @@ function ui_removeRow() {
   var table = document.getElementById('t_gameLobby');
   var rowCount = table.rows.length;
   for (var i = tableHeaderRowCount; i < rowCount; i++) {
-    table.deleteRow(tableHeaderRowCount);
+    table.deleteRow(tableHeaderRowCount); 
   }
 }
 

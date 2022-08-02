@@ -206,6 +206,34 @@ function fb_readAll(_path, _processData) {
 }
 
 /**************************************************************/
+// fb_readAllReadOn(_path, _data)
+// Read all DB records for the path
+// Input:  path to read from and Function name that processs the data
+// Return:
+/**************************************************************/
+function fb_readAllReadOn(_path, _processData) {
+  console.log('fb_readAllReadOn: path= ' + _path);
+
+  readStatus = "waiting";
+  firebase.database().ref(_path).on("value", gotRecord, readErr);
+
+  function gotRecord(snapshot) {
+    if (snapshot.val() == null) {
+      readStatus = "no record";
+      console.log(readStatus);
+    } else {
+      readStatus = "OK";
+      _processData("OK", snapshot)
+    }
+  }
+
+  function readErr(error) {
+    readStatus = "fail";
+    console.log(error);
+  }
+}
+
+/**************************************************************/
 // fb_readRec(_path, _key, _data, _function)
 // Read a DB record 
 // Input:  path & key of record to read and where to save it
@@ -232,6 +260,19 @@ function fb_readRec(_path, _key, _data, _processFunc) {
     readStatus = "fail";
     console.log(error);
   }
+}
+
+/**************************************************************/
+// fb_readOffRec(_path, _key, _function)
+// Initilise a readon on a firebase record
+// Input:  path & key of record to read and where to save it
+// Return:  
+/**************************************************************/
+function fb_readOffRec(_path, _key,) {
+  console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
+
+  readStatus = "waiting";
+  firebase.database().ref(_path + '/' + _key).off();
 }
 
 /**************************************************************/

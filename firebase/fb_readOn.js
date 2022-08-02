@@ -57,22 +57,24 @@ function fb_createPendingTable() {
 function fb_createPendingLobby() {
   fb_pendingLobby.gameName = prompt("what is your game name?");
 
-  const time = new Date();
-  var minute = time.getUTCMinutes();
-  var hour = time.getUTCHours();
-  var day = time.getUTCDate();
-  var month = time.getUTCMonth() + 1;
-  var year = time.getUTCFullYear();
+  if (fb_pendingLobby.gameName != "" && fb_pendingLobby.gameName != null) {
+    const time = new Date();
+    var minute = time.getUTCMinutes();
+    var hour = time.getUTCHours();
+    var day = time.getUTCDate();
+    var month = time.getUTCMonth() + 1;
+    var year = time.getUTCFullYear();
 
-  if (minute < 10) {
-    minute = "0" + minute;
+    if (minute < 10) {
+      minute = "0" + minute;
+    }
+    fb_pendingLobby.timeStamp = day + "/" + month + "/" + year + " " + hour + ":" + minute;
+    console.log(fb_pendingLobby.timeStamp);
+
+    fb_writeRec(PENDING_LOBBY, fb_pendingLobby.gameName, fb_pendingLobby);
+    ui_pageSwap("s_lobbyP", "s_activeP");
+    fb_readOnRec(PENDING_LOBBY, fb_pendingLobby.gameName + '/' + "pendingStatus", fb_readOnPendingStatus);
   }
-  fb_pendingLobby.timeStamp = day + "/" + month + "/" + year + " " + hour + ":" + minute;
-  console.log(fb_pendingLobby.timeStamp);
-
-  fb_writeRec(PENDING_LOBBY, fb_pendingLobby.gameName, fb_pendingLobby);
-  ui_pageSwap("s_lobbyP", "s_activeP");
-  fb_readOnRec(PENDING_LOBBY, fb_pendingLobby.gameName + '/' + "pendingStatus", fb_readOnPendingStatus);
 }
 
 /**************************************************************/
