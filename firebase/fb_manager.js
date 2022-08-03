@@ -263,19 +263,6 @@ function fb_readRec(_path, _key, _data, _processFunc) {
 }
 
 /**************************************************************/
-// fb_readOffRec(_path, _key, _function)
-// Initilise a readon on a firebase record
-// Input:  path & key of record to read and where to save it
-// Return:  
-/**************************************************************/
-function fb_readOffRec(_path, _key,) {
-  console.log('fb_readRec: path= ' + _path + '  key= ' + _key);
-
-  readStatus = "waiting";
-  firebase.database().ref(_path + '/' + _key).off();
-}
-
-/**************************************************************/
 // fb_processPlayerDetails()
 // Stores database record in a function
 // Input: n/a
@@ -373,6 +360,7 @@ function fb_processScore(_status, _dbData) {
   fb_score.localPlayer.loss = _dbData.loss;
   fb_score.localPlayer.draw = _dbData.draw;
 }
+
 /**************************************************************/
 // fb_processAdmin()
 // Process if the user is a admin or not
@@ -385,6 +373,7 @@ function fb_processAdmin (_status) {
     document.getElementById("s_adminBTN").style.display="block";
   }
 }
+
 /**************************************************************/
 // END OF MODULE
 /**************************************************************/

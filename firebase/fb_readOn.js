@@ -44,7 +44,7 @@ var fb_score = {
 // Return:  
 /**************************************************************/
 function fb_createPendingTable() {
-  fb_readAll(PENDING_LOBBY, processPendingLobby);
+  fb_readAllReadOn(PENDING_LOBBY, processPendingLobby);
   ui_pageSwap("s_lobbyP", "s_pendingP");
 }
 
@@ -411,6 +411,7 @@ function fb_updatePlayer1NameAndScore(_readStatus, _data) {
     document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
     document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
     document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+    document.getElementById("btmText").innerHTML = fb_activeLobby.player1.name + " Turn";
   }
 }
 
@@ -450,6 +451,8 @@ function fb_updatePlayer2NameAndScore(_readStatus, _data) {
     document.getElementById("win1").innerHTML = "Wins: " + ttt_player[1].win;
     document.getElementById("loss1").innerHTML = "Loss: " + ttt_player[1].loss;
     document.getElementById("draw1").innerHTML = "Draw: " + ttt_player[1].draw;
+
+    document.getElementById("btmText").innerHTML = fb_activeLobby.player1.name + " Turn";
   }
 }
 
